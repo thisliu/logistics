@@ -1,0 +1,17 @@
+{
+    "name": "onechoo\/logistics-inquiry",
+    "description": "A logistics-inquiry SDK.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "onechoo",
+            "email": "liuhao25@foxmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Onechoo\\LogisticsInquiry\\": "src"
+        }
+    }
+}
