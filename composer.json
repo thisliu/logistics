@@ -8,7 +8,11 @@
             "email": "liuhao25@foxmail.com"
         }
     ],
-    "require": {},
+    "require": {
+        "guzzlehttp/guzzle": "^6.3",
+        "phpunit/phpunit": "^8.1",
+        "mockery/mockery": "^1.2"
+    },
     "autoload": {
         "psr-4": {
             "Onechoo\\LogisticsInquiry\\": "src"
