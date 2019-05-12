@@ -27,14 +27,14 @@ class Logistics
     }
 
     /**
-     * @param        $no
-     * @param string $type
+     * @param             $no
+     * @param string|null $type
      *
-     * @return mixed
+     * @return string
      *
      * @throws \Onechoo\LogisticsInquiry\Exceptions\HttpException
      */
-    public function getLogisticsInfo($no, string $type = '')
+    public function getLogisticsInfo($no, string $type = null)
     {
         $url = 'http://wuliu.market.alicloudapi.com/kdi';
 
@@ -46,11 +46,10 @@ class Logistics
         try {
             $response = $this->getHttpClient()->get($url, [
                 'query' => $query,
-            ], [
-                'headers' => ['Authorization' => 'APPCODE ' . $this->appCode],
-            ])->getHeaders();
+                'headers' => ['Authorization' => \sprintf('APPCODE %s', $this->appCode)],
+            ])->getBody()->getContents();
 
-            return \json_decode($response, true);
+            return $response;
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }

@@ -21,16 +21,21 @@ class LogisticsTest extends TestCase
 
         $client = \Mockery::mock(Client::class);
 
-        $client->allows()->get('https://wuliu.market.alicloudapi.com/kdi', [
-            'query' => ['no' => '7521488'],
-            'headers' => ["Authorization:APPCODE mock-key"],
+        $query = array_filter([
+            'no' => '7521488',
+            'type' => null,
+        ]);
+
+        $client->allows()->get('http://wuliu.market.alicloudapi.com/kdi', [
+            'query' => $query,
+            'headers' => ['Authorization' => \sprintf('APPCODE %s', 'mock-key')],
         ])->andReturn($response);
 
         $w = \Mockery::mock(Logistics::class, ['mock-key'])->makePartial();
 
         $w->allows()->getHttpClient()->andReturn($client);
 
-        $this->assertSame(['success' => true], $w->getLogisticsInfo('7521488'));
+        $this->assertSame('{"success": true}', $w->getLogisticsInfo('7521488'));
     }
 
     public function testGetHttpClient()
