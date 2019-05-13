@@ -17,5 +17,12 @@
         "psr-4": {
             "Onechoo\\LogisticsInquiry\\": "src"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Onechoo\\LogisticsInquiry\\ServiceProvider"
+            ]
+        }
     }
 }
