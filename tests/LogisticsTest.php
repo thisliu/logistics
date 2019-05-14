@@ -9,7 +9,7 @@ use GuzzleHttp\Psr7\Response;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class LogisticsTest
+ * Class LogisticsTest.
  *
  * @author finecho <liuhao25@foxmail.com>
  */

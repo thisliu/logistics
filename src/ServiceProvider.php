@@ -8,7 +8,7 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(Logistics::class, function(){
+        $this->app->singleton(Logistics::class, function () {
             return new Logistics(config('services.logistics.app_code'));
         });
 

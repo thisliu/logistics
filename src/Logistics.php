@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 use Finecho\LogisticsInquiry\Exceptions\HttpException;
 
 /**
- * Class Logistics
+ * Class Logistics.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
