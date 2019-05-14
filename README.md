@@ -3,6 +3,8 @@
 
 <p align="center">基于阿里云市场的 PHP 全国快递物流查询-快递查询接口组件。</p>
 
+[![Build Status](https://travis-ci.org/finecho/logistics-inquiry.svg?branch=master)](https://travis-ci.org/finecho/logistics-inquiry)
+
 ## 安装
 
 ```sh
