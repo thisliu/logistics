@@ -21,7 +21,7 @@ class Logistics
      *
      * @param string $appCode
      */
-    public function __construct(string $appCode)
+    public function __construct($appCode)
     {
         $this->appCode = $appCode;
     }
@@ -34,7 +34,7 @@ class Logistics
      *
      * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
      */
-    public function getLogisticsInfo($no, string $type = null)
+    public function getLogisticsInfo($no, $type = null)
     {
         $url = 'http://wuliu.market.alicloudapi.com/kdi';
 
@@ -53,7 +53,7 @@ class Logistics
      *
      * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
      */
-    public function getLogisticsCompany(string $type = 'ALL')
+    public function getLogisticsCompany($type = 'ALL')
     {
         $url = 'http://wuliu.market.alicloudapi.com/getExpressList';
 
@@ -88,7 +88,7 @@ class Logistics
      *
      * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
      */
-    private function sendRequest(string $url, array $query)
+    private function sendRequest($url, $query)
     {
         try {
             $response = $this->getHttpClient()->get($url, [
