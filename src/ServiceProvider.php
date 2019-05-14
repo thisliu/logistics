@@ -1,6 +1,6 @@
 <?php
 
-namespace Onechoo\LogisticsInquiry;
+namespace Finecho\LogisticsInquiry;
 
 class ServiceProvider extends \Illuminate\Support\ServiceProvider
 {

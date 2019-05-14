@@ -1,13 +1,11 @@
 <?php
 
-
-namespace Onechoo\LogisticsInquiry\Exceptions;
-
+namespace Finecho\LogisticsInquiry\Exceptions;
 
 /**
  * Class InvalidArgumentException
  *
- * @author onechoo <liuhao25@foxmail.com>
+ * @author finecho <liuhao25@foxmail.com>
  */
 class HttpException extends Exception
 {

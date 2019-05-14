@@ -1,27 +1,27 @@
 {
-    "name": "onechoo\/logistics-inquiry",
+    "name": "finecho\/logistics-inquiry",
     "description": "A logistics-inquiry SDK.",
     "license": "MIT",
     "authors": [
         {
-            "name": "onechoo",
+            "name": "finecho",
             "email": "liuhao25@foxmail.com"
         }
     ],
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "phpunit/phpunit": "^8.1",
+        "phpunit/phpunit": "^7.5",
         "mockery/mockery": "^1.2"
     },
     "autoload": {
         "psr-4": {
-            "Onechoo\\LogisticsInquiry\\": "src"
+            "Finecho\\LogisticsInquiry\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Onechoo\\LogisticsInquiry\\ServiceProvider"
+                "Finecho\\LogisticsInquiry\\ServiceProvider"
             ]
         }
     }

@@ -1,17 +1,17 @@
 <?php
 
-namespace Onechoo\LogisticsInquiry\Tests;
+namespace Finecho\LogisticsInquiry\Tests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
-use Onechoo\LogisticsInquiry\Logistics;
+use Finecho\LogisticsInquiry\Logistics;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Class LogisticsTest
  *
- * @author onechoo <liuhao25@foxmail.com>
+ * @author finecho <liuhao25@foxmail.com>
  */
 class LogisticsTest extends TestCase
 {

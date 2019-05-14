@@ -1,14 +1,14 @@
 <?php
 
-namespace Onechoo\LogisticsInquiry;
+namespace Finecho\LogisticsInquiry;
 
 use GuzzleHttp\Client;
-use Onechoo\LogisticsInquiry\Exceptions\HttpException;
+use Finecho\LogisticsInquiry\Exceptions\HttpException;
 
 /**
  * Class Logistics
  *
- * @author onechoo <liuhao25@foxmail.com>
+ * @author finecho <liuhao25@foxmail.com>
  */
 class Logistics
 {
@@ -32,7 +32,7 @@ class Logistics
      *
      * @return string
      *
-     * @throws \Onechoo\LogisticsInquiry\Exceptions\HttpException
+     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
      */
     public function getLogisticsInfo($no, string $type = null)
     {
