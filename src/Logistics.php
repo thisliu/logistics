@@ -43,16 +43,25 @@ class Logistics
             'type' => $type,
         ]);
 
-        try {
-            $response = $this->getHttpClient()->get($url, [
-                'query' => $query,
-                'headers' => ['Authorization' => \sprintf('APPCODE %s', $this->appCode)],
-            ])->getBody()->getContents();
+        return $this->sendRequest($url, $query);
+    }
 
-            return $response;
-        } catch (\Exception $e) {
-            throw new HttpException($e->getMessage(), $e->getCode(), $e);
-        }
+    /**
+     * @param string|null $type
+     *
+     * @return string
+     *
+     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
+     */
+    public function getLogisticsCompany(string $type = 'ALL')
+    {
+        $url = 'http://wuliu.market.alicloudapi.com/getExpressList';
+
+        $query = array_filter([
+            'type' => $type,
+        ]);
+
+        return $this->sendRequest($url, $query);
     }
 
     /**
@@ -69,5 +78,27 @@ class Logistics
     public function setGuzzleOptions(array $options)
     {
         $this->guzzleOptions = $options;
+    }
+
+    /**
+     * @param string $url
+     * @param array  $query
+     *
+     * @return string
+     *
+     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
+     */
+    private function sendRequest(string $url, array $query)
+    {
+        try {
+            $response = $this->getHttpClient()->get($url, [
+                'query' => $query,
+                'headers' => ['Authorization' => \sprintf('APPCODE %s', $this->appCode)],
+            ])->getBody()->getContents();
+
+            return $response;
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode(), $e);
+        }
     }
 }
