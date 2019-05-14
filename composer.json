@@ -10,8 +10,8 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "^6.3",
-        "phpunit/phpunit": "^7.5",
-        "mockery/mockery": "^1.2"
+        "mockery/mockery": "^1.2",
+        "phpunit/phpunit": "~5"
     },
     "autoload": {
         "psr-4": {
