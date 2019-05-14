@@ -3,11 +3,10 @@
 namespace Finecho\LogisticsInquiry\Exceptions;
 
 /**
- * Class Exception
+ * Class Exception.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
 class Exception extends \Exception
 {
-
 }
