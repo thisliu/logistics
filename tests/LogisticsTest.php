@@ -2,10 +2,10 @@
 
 namespace Finecho\LogisticsInquiry\Tests;
 
+use Finecho\LogisticsInquiry\Logistics;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
-use Finecho\LogisticsInquiry\Logistics;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -31,11 +31,11 @@ class LogisticsTest extends TestCase
             'headers' => ['Authorization' => \sprintf('APPCODE %s', 'mock-key')],
         ])->andReturn($response);
 
-        $w = \Mockery::mock(Logistics::class, ['mock-key'])->makePartial();
+        $l = \Mockery::mock(Logistics::class, ['mock-key'])->makePartial();
 
-        $w->allows()->getHttpClient()->andReturn($client);
+        $l->allows()->getHttpClient()->andReturn($client);
 
-        $this->assertSame('{"success": true}', $w->getLogisticsInfo('7521488'));
+        $this->assertSame('{"success": true}', $l->getLogisticsInfo('7521488'));
     }
 
     public function testGetHttpClient()
@@ -54,5 +54,27 @@ class LogisticsTest extends TestCase
         $w->setGuzzleOptions(['timeout' => 5000]);
 
         $this->assertSame(5000, $w->getHttpClient()->getConfig('timeout'));
+    }
+
+    public function testGetLogisticsCompany()
+    {
+        $response = new Response(200, [], '{"success": true}');
+
+        $client = \Mockery::mock(Client::class);
+
+        $query = array_filter([
+            'type' => 'ALL',
+        ]);
+
+        $client->allows()->get('http://wuliu.market.alicloudapi.com/getExpressList', [
+            'query' => $query,
+            'headers' => ['Authorization' => \sprintf('APPCODE %s', 'mock-key')],
+        ])->andReturn($response);
+
+        $l = \Mockery::mock(Logistics::class, ['mock-key'])->makePartial();
+
+        $l->allows()->getHttpClient()->andReturn($client);
+
+        $this->assertSame('{"success": true}', $l->getLogisticsCompany('ALL'));
     }
 }
