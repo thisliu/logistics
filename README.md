@@ -1,7 +1,7 @@
 
 <h1 align="center">Logistics-inquiry</h1>
 
-<p align="center">基于阿里云市场的 PHP 全国快递物流查询-快递查询接口组件。</p>
+<p align="center">基于阿里云市场的 PHP 全国快递物流查询-快递查询接口组件。(多平台兼容开发中...)</p>
 
 [![Build Status](https://travis-ci.org/finecho/logistics-inquiry.svg?branch=master)](https://travis-ci.org/finecho/logistics-inquiry)
 ![StyleCI build status](https://github.styleci.io/repos/185047335/shield) 
