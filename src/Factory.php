@@ -60,6 +60,6 @@ class Factory
     {
         $provider = ucfirst($provider);
 
-        return __NAMESPACE__."\\Providers\\{$provider}\\{$provider}";
+        return __NAMESPACE__."\\Providers\\{$provider}";
     }
 }
