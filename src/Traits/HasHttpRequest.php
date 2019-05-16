@@ -15,7 +15,7 @@ use GuzzleHttp\Client;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Trait HasHttpRequest
+ * Trait HasHttpRequest.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
