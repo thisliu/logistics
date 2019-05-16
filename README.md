@@ -119,9 +119,6 @@ $response = $logistics->companies('zto');
 }	
 ```	
 
-```	
-$response = $logistics->getLogisticsCompany('ALL');	
-```	
 示例：	
 
 ```json	
@@ -149,7 +146,7 @@ $response = $logistics->getLogisticsCompany('ALL');
 ### 参数说明	
 
 ```	
- array | string   show(string $no, string $type = null)	
+ string   show(string $no, string $type = null)	
 ```	
 
 > - `$no` - 物流单号/比如：“805741929402797742”	
