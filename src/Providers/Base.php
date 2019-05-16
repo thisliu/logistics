@@ -14,7 +14,7 @@ namespace Finecho\LogisticsInquiry\Providers;
 use Finecho\LogisticsInquiry\Contracts\Resolvable;
 
 /**
- * Class Base
+ * Class Base.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
@@ -31,7 +31,6 @@ abstract class Base implements Resolvable
      * Base constructor.
      *
      * @param array $config
-     *
      */
     public function __construct($config)
     {

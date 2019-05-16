@@ -12,7 +12,7 @@
 namespace Finecho\LogisticsInquiry;
 
 /**
- * Class ServiceProvider
+ * Class ServiceProvider.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
