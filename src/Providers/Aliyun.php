@@ -47,6 +47,22 @@ class Aliyun extends Base
     }
 
     /**
+     * @param string $type
+     *
+     * @return array
+     */
+    public function companies($type = 'ALL')
+    {
+        $params = \array_filter([
+            'type' => $type,
+        ]);
+
+        $headers = ['Authorization' => \sprintf('APPCODE %s', $this->config['aliyun']['app_code'])];
+
+        return $this->get(self::LOGISTICS_COMPANY_URL, $params, $headers);
+    }
+
+    /**
      * @return string
      */
     public function getProviderName()
