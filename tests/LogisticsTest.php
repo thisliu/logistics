@@ -2,7 +2,7 @@
 
 namespace Finecho\LogisticsInquiry\Tests;
 
-use Finecho\LogisticsInquiry\Logistics;
+use Finecho\LogisticsInquiry\Aliyun;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Response;
@@ -31,7 +31,7 @@ class LogisticsTest extends TestCase
             'headers' => ['Authorization' => \sprintf('APPCODE %s', 'mock-key')],
         ])->andReturn($response);
 
-        $l = \Mockery::mock(Logistics::class, ['mock-key'])->makePartial();
+        $l = \Mockery::mock(Aliyun::class, ['mock-key'])->makePartial();
 
         $l->allows()->getHttpClient()->andReturn($client);
 
@@ -40,14 +40,14 @@ class LogisticsTest extends TestCase
 
     public function testGetHttpClient()
     {
-        $w = new Logistics('mock-key');
+        $w = new Aliyun('mock-key');
 
         $this->assertInstanceOf(ClientInterface::class, $w->getHttpClient());
     }
 
     public function testSetGuzzleOptions()
     {
-        $w = new Logistics('mock-key');
+        $w = new Aliyun('mock-key');
 
         $this->assertNull($w->getHttpClient()->getConfig('timeout'));
 
@@ -71,7 +71,7 @@ class LogisticsTest extends TestCase
             'headers' => ['Authorization' => \sprintf('APPCODE %s', 'mock-key')],
         ])->andReturn($response);
 
-        $l = \Mockery::mock(Logistics::class, ['mock-key'])->makePartial();
+        $l = \Mockery::mock(Aliyun::class, ['mock-key'])->makePartial();
 
         $l->allows()->getHttpClient()->andReturn($client);
 

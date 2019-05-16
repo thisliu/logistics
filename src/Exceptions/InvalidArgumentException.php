@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the finecho/logistics-inquiry.
+ * This file is part of the finehco/logistics-inquiry.
  *
  * (c) finecho <liuhao25@foxmail.com>
  *
@@ -12,10 +12,10 @@
 namespace Finecho\LogisticsInquiry\Exceptions;
 
 /**
- * Class InvalidArgumentException.
+ * Class InvalidArgumentException
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-class HttpException extends Exception
+class InvalidArgumentException extends Exception
 {
 }

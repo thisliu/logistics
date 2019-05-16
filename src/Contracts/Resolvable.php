@@ -9,13 +9,24 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Finecho\LogisticsInquiry\Exceptions;
+namespace Finecho\LogisticsInquiry\Contracts;
 
 /**
- * Class InvalidArgumentException.
+ * Interface Resolvable
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-class HttpException extends Exception
+interface Resolvable
 {
+    /**
+     * @param string $no
+     *
+     * @return array
+     */
+    public function show($no);
+
+    /**
+     * @return string
+     */
+    public function getProviderName();
 }
