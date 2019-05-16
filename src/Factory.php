@@ -14,7 +14,7 @@ namespace Finecho\LogisticsInquiry;
 use Finecho\LogisticsInquiry\Exceptions\InvalidArgumentException;
 
 /**
- * Class Factory
+ * Class Factory.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
