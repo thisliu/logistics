@@ -14,7 +14,7 @@ namespace Finecho\LogisticsInquiry\Providers;
 use Finecho\LogisticsInquiry\Traits\HasHttpRequest;
 
 /**
- * Class Aliyun
+ * Class Aliyun.
  *
  * @author finecho <liuhao25@foxmail.com>
  */

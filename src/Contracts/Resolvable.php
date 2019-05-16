@@ -12,7 +12,7 @@
 namespace Finecho\LogisticsInquiry\Contracts;
 
 /**
- * Interface Resolvable
+ * Interface Resolvable.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
