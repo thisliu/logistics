@@ -9,13 +9,8 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Finecho\LogisticsInquiry\Exceptions;
-
-/**
- * Class InvalidArgumentException.
- *
- * @author finecho <liuhao25@foxmail.com>
- */
-class HttpException extends Exception
-{
-}
+return [
+    'aliyun' => [
+        'app_code' => env('LOGISTICS_APP_CODE'),
+    ],
+];
