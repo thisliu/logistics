@@ -11,6 +11,8 @@
 
 namespace Finecho\LogisticsInquiry\Providers;
 
+use Finecho\LogisticsInquiry\Exceptions\HttpException;
+use Finecho\LogisticsInquiry\Exceptions\InquiryErrorException;
 use Finecho\LogisticsInquiry\Traits\HasHttpRequest;
 
 /**
@@ -28,11 +30,16 @@ class Aliyun extends Base
 
     const LOGISTICS_COMPANY_URL = 'http://wuliu.market.alicloudapi.com/getExpressList';
 
+    const SUCCESS_STATUS = 0;
+
     /**
      * @param string $no
      * @param null   $type
      *
      * @return array
+     *
+     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
+     * @throws \Finecho\LogisticsInquiry\Exceptions\InquiryErrorException
      */
     public function show($no, $type = null)
     {
@@ -43,13 +50,16 @@ class Aliyun extends Base
 
         $headers = ['Authorization' => \sprintf('APPCODE %s', $this->config['aliyun']['app_code'])];
 
-        return $this->get(self::LOGISTICS_INFO_URL, $params, $headers);
+        return $this->sendRequest(self::LOGISTICS_INFO_URL, $params, $headers, self::SUCCESS_STATUS);
     }
 
     /**
      * @param string $type
      *
      * @return array
+     *
+     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
+     * @throws \Finecho\LogisticsInquiry\Exceptions\InquiryErrorException
      */
     public function companies($type = 'ALL')
     {
@@ -59,7 +69,7 @@ class Aliyun extends Base
 
         $headers = ['Authorization' => \sprintf('APPCODE %s', $this->config['aliyun']['app_code'])];
 
-        return $this->get(self::LOGISTICS_COMPANY_URL, $params, $headers);
+        return $this->sendRequest(self::LOGISTICS_COMPANY_URL, $params, $headers);
     }
 
     /**
@@ -68,5 +78,31 @@ class Aliyun extends Base
     public function getProviderName()
     {
         return static::PROVIDER_NAME;
+    }
+
+    /**
+     * @param     $url
+     * @param     $params
+     * @param     $headers
+     * @param int $SUCCESS_STATUS
+     *
+     * @return array
+     *
+     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
+     * @throws \Finecho\LogisticsInquiry\Exceptions\InquiryErrorException
+     */
+    protected function sendRequest($url, $params, $headers, $SUCCESS_STATUS = 200)
+    {
+        try {
+            $result = $this->get($url, $params, $headers);
+        } catch (\Exception $e) {
+            throw new HttpException($e->getMessage(), $e->getCode(), $e);
+        }
+
+        if ($SUCCESS_STATUS != $result['status']) {
+            throw new InquiryErrorException($result['msg'], $result['status'], $result);
+        }
+
+        return $result;
     }
 }
