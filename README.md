@@ -178,9 +178,9 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show(Logistics $logistics) 	
+    public function show(LogisticsInquery $logisticsInquery) 	
     {	
-        $response = $logistics->show('xxxxx');	
+        $response = $logisticsInquery->show('xxxxx');	
     }	
     .	
     .	
@@ -195,7 +195,7 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     public function show() 	
     {	
-        $response = app('logistics')->show('xxxxx');	
+        $response = app('logisticsInquery')->show('xxxxx');	
     }	
     .	
     .	
