@@ -14,5 +14,5 @@ return [
 
     'aliyun' => [
         'app_code' => env('LOGISTICS_APP_CODE'),
-    ]
+    ],
 ];
