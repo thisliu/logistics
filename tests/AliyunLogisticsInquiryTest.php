@@ -18,7 +18,7 @@ use Mockery\Exception\BadMethodCallException;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class AliyunLogisticsInquiryTest
+ * Class AliyunLogisticsInquiryTest.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
@@ -31,7 +31,7 @@ class AliyunLogisticsInquiryTest extends TestCase
 
             'aliyun' => [
                 'app_code' => 'xxxxxxx',
-            ]];
+            ], ];
 
         $response = new Response(200, [], '{"success": true}');
 
@@ -48,7 +48,7 @@ class AliyunLogisticsInquiryTest extends TestCase
 
             'aliyun' => [
                 'app_code' => 'xxxxxxx',
-            ]];
+            ], ];
 
         $response = new Response(200, [], '{"success": true}');
 
@@ -65,7 +65,7 @@ class AliyunLogisticsInquiryTest extends TestCase
 
             'aliyun' => [
                 'app_code' => 'xxxxxxx',
-            ]];
+            ], ];
 
         $response = new Response(200, [], '{"success": true}');
 
