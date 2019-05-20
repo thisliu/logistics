@@ -12,7 +12,7 @@
 namespace Finecho\LogisticsInquiry\Exceptions;
 
 /**
- * Class InquiryErrorException
+ * Class InquiryErrorException.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
