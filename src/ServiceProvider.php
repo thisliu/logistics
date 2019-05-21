@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the finecho/logistics-inquiry.
+ * This file is part of the finecho/logistics.
  *
  * (c) finecho <liuhao25@foxmail.com>
  *
@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Finecho\LogisticsInquiry;
+namespace Finecho\Logistics;
 
 /**
  * Class ServiceProvider.
@@ -29,15 +29,15 @@ class ServiceProvider extends \Illuminate\Support\ServiceProvider
 
     public function register()
     {
-        $this->app->singleton(LogisticsInquiry::class, function () {
-            return new LogisticsInquiry(config('logistics'));
+        $this->app->singleton(Logistics::class, function () {
+            return new Logistics(config('logistics'));
         });
 
-        $this->app->alias(LogisticsInquiry::class, 'logisticsInquiry');
+        $this->app->alias(Logistics::class, 'logistics');
     }
 
     public function provides()
     {
-        return [LogisticsInquiry::class, 'logisticsInquiry'];
+        return [Logistics::class, 'logistics'];
     }
 }

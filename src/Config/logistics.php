@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the finecho/logistics-inquiry.
+ * This file is part of the finecho/logistics.
  *
  * (c) finecho <liuhao25@foxmail.com>
  *

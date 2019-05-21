@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the finecho/logistics-inquiry.
+ * This file is part of the finecho/logistics.
  *
  * (c) finecho <liuhao25@foxmail.com>
  *
@@ -9,14 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Finecho\LogisticsInquiry;
+namespace Finecho\Logistics;
 
 /**
- * Class LogisticsInquiry.
+ * Class Logistics
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-class LogisticsInquiry
+class Logistics
 {
     protected $factory;
 
@@ -31,7 +31,7 @@ class LogisticsInquiry
      *
      * @return mixed
      *
-     * @throws \Finecho\LogisticsInquiry\Exceptions\InvalidArgumentException
+     * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
      */
     public function __call($name, $arguments)
     {

@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the finecho/logistics-inquiry.
+ * This file is part of the finecho/logistics.
  *
  * (c) finecho <liuhao25@foxmail.com>
  *
@@ -9,9 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Finecho\LogisticsInquiry\Providers;
+namespace Finecho\Logistics\Providers;
 
-use Finecho\LogisticsInquiry\Contracts\Resolvable;
+use Finecho\Logistics\Contracts\Resolvable;
 
 /**
  * Class Base.

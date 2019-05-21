@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the finecho/logistics-inquiry.
+ * This file is part of the finecho/logistics.
  *
  * (c) finecho <liuhao25@foxmail.com>
  *
@@ -9,11 +9,11 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Finecho\LogisticsInquiry\Providers;
+namespace Finecho\Logistics\Providers;
 
-use Finecho\LogisticsInquiry\Exceptions\HttpException;
-use Finecho\LogisticsInquiry\Exceptions\InquiryErrorException;
-use Finecho\LogisticsInquiry\Traits\HasHttpRequest;
+use Finecho\Logistics\Exceptions\HttpException;
+use Finecho\Logistics\Exceptions\InquiryErrorException;
+use Finecho\Logistics\Traits\HasHttpRequest;
 
 /**
  * Class Aliyun.
@@ -38,8 +38,8 @@ class Aliyun extends Base
      *
      * @return array
      *
-     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
-     * @throws \Finecho\LogisticsInquiry\Exceptions\InquiryErrorException
+     * @throws \Finecho\Logistics\Exceptions\HttpException
+     * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      */
     public function show($no, $type = null)
     {
@@ -58,8 +58,8 @@ class Aliyun extends Base
      *
      * @return array
      *
-     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
-     * @throws \Finecho\LogisticsInquiry\Exceptions\InquiryErrorException
+     * @throws \Finecho\Logistics\Exceptions\HttpException
+     * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      */
     public function companies($type = 'ALL')
     {
@@ -88,8 +88,8 @@ class Aliyun extends Base
      *
      * @return array
      *
-     * @throws \Finecho\LogisticsInquiry\Exceptions\HttpException
-     * @throws \Finecho\LogisticsInquiry\Exceptions\InquiryErrorException
+     * @throws \Finecho\Logistics\Exceptions\HttpException
+     * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      */
     protected function sendRequest($url, $params, $headers, $SUCCESS_STATUS = 200)
     {

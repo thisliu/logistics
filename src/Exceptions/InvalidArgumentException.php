@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the finehco/logistics-inquiry.
+ * This file is part of the finehco/logistics.
  *
  * (c) finecho <liuhao25@foxmail.com>
  *
@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Finecho\LogisticsInquiry\Exceptions;
+namespace Finecho\Logistics\Exceptions;
 
 /**
  * Class InvalidArgumentException.

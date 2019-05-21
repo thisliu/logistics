@@ -1,8 +1,8 @@
-<h1 align="center">Logistics-inquiry</h1>
+<h1 align="center">Logistics</h1>
 
 <p align="center">快递物流查询-快递查询接口组件。(多平台兼容)</p>	
 
- [![Build Status](https://travis-ci.org/finecho/logistics-inquiry.svg?branch=master)](https://travis-ci.org/finecho/logistics-inquiry)	
+ [![Build Status](https://travis-ci.org/finecho/logistics.svg?branch=master)](https://travis-ci.org/finecho/logistics)	
 ![StyleCI build status](https://github.styleci.io/repos/185047335/shield) 	
 
  ## 介绍
@@ -18,7 +18,7 @@
  ## 安装	
 
 ```
-$ composer require finecho/logistics-inquiry -vvv	
+$ composer require finecho/logistics -vvv	
 ```	
 
  ## 使用	
@@ -26,7 +26,7 @@ $ composer require finecho/logistics-inquiry -vvv
 ```php	
 require __DIR__ .'/vendor/autoload.php';
 
-use Finecho\LogisticsInquiry\LogisticsInquiry;
+use Finecho\Logistics\Logistics;
 
 $config = [
     'provider' => 'aliyun',
@@ -35,7 +35,7 @@ $config = [
     ]
 ];
 
-$logistics = new LogisticsInquiry($config);
+$logistics = new Logistics($config);
 ```	
 
  ###  获取物流信息	
@@ -161,7 +161,7 @@ $response = $logistics->companies('zto');
 
 生成配置文件
 ```bash
-php artisan vendor:publish --provider="Finecho\LogisticsInquiry\ServiceProvider"
+php artisan vendor:publish --provider="Finecho\Logistics\ServiceProvider"
 ```	
 
 然后在 `.env` 中配置 `LOGISTICS_APP_CODE` ：	
@@ -170,7 +170,7 @@ php artisan vendor:publish --provider="Finecho\LogisticsInquiry\ServiceProvider"
 LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx	
 ```
 
-可以用两种方式来获取 `Finecho\LogisticsInquiry\Logistics;` 实例：	
+可以用两种方式来获取 `Finecho\Logistics\Logistics;` 实例：	
 
 #### 方法参数注入	
 
@@ -178,9 +178,9 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show(LogisticsInquery $logisticsInquery) 	
+    public function show(Logistics $logistics) 	
     {	
-        $response = $logisticsInquery->show('xxxxx');	
+        $response = $logistics->show('xxxxx');	
     }	
     .	
     .	
@@ -195,7 +195,7 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     public function show() 	
     {	
-        $response = app('logisticsInquery')->show('xxxxx');	
+        $response = app('logistics')->show('xxxxx');	
     }	
     .	
     .	
