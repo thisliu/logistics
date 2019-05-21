@@ -12,7 +12,7 @@
 namespace Finecho\Logistics;
 
 /**
- * Class Logistics
+ * Class Logistics.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
