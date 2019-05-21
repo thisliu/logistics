@@ -1,6 +1,6 @@
 {
-    "name": "finecho\/logistics-inquiry",
-    "description": "A logistics-inquiry SDK.",
+    "name": "finecho\/logistics",
+    "description": "A logistics SDK.",
     "license": "MIT",
     "authors": [
         {
@@ -13,13 +13,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Finecho\\LogisticsInquiry\\": "src"
+            "Finecho\\Logistics\\": "src"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Finecho\\LogisticsInquiry\\ServiceProvider"
+                "Finecho\\Logistics\\ServiceProvider"
             ]
         }
     },
