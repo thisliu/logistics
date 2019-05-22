@@ -41,121 +41,147 @@ $logistics = new Logistics($config);
  ###  获取物流信息	
 
 ```php	
-$response = $logistics->show('XXXXX');	
+$order = $logistics->order('XXXXX');	
 ```	
 示例：	
 
 ```json	
-{	
-    "status": "0",	
-    "msg": "ok",	
-    "result": {	
-        "number": "********",	
-        "type": "yto",	
-        "list": [	
-            {	
-                "time": "2019-5-9 12:44:40",	
-                "status": "客户 签收人: 邮件收发章 已签收 感谢使用圆通速递，期待再次为您服务"	
-            },	
-            {	
-                "time": "2019-5-9 8:37:02",	
-                "status": "【湖南省长沙市火车站公司】 派件人: *** 派件中 派件员电话 ********"	
-            },	
-            {	
-                "time": "2019-5-8 23:17:46",	
-                "status": "【长沙转运中心】 已发出 下一站 【湖南省长沙市火车站公司】"	
-            },	
-            {	
-                "time": "2019-5-8 22:47:28",	
-                "status": "【长沙转运中心】 已收入"	
-            },	
-            {	
-                "time": "2019-5-7 22:41:27",	
-                "status": "【济南转运中心】 已发出 下一站 【长沙转运中心】"	
-            },	
-            {	
-                "time": "2019-5-7 22:37:27",	
-                "status": "【济南转运中心】 已收入"	
-            },	
-            {	
-                "time": "2019-5-7 19:05:04",	
-                "status": "【山东省淄博市淄川区三部】 已发出 下一站 【山东省淄博市公司】"	
-            },	
-            {	
-                "time": "2019-5-7 18:33:15",	
-                "status": "【山东省淄博市淄川区三部公司】 已打包"	
-            },	
-            {	
-                "time": "2019-5-7 18:02:27",	
-                "status": "【山东省淄博市淄川区三部公司】 已收件"	
-            }	
-        ],	
-        "deliverystatus": "3",	
-        "issign": "1",	
-        "expName": "圆通速递",	
-        "expSite": "www.yto.net.cn ",	
-        "expPhone": "95554",	
-        "logo": "http://img3.fegine.com/express/yto.jpg",	
-        "courier": "",	
-        "courierPhone": ""	
-    }	
-}	
+{
+    "code": 200,
+    "msg": "OK",
+    "company": "yto",
+    "no": "xxxxxxxxx",
+    "status": "已签收",
+    "courier": "",
+    "courierPhone": "",
+    "list": [
+        {
+            "time": "2019-5-9 12:44:40",
+            "status": "客户 签收人: 邮件收发章 已签收 感谢使用圆通速递，期待再次为您服务"
+        },
+        {
+            "time": "2019-5-9 8:37:02",
+            "status": "【湖南省长沙市火车站公司】 派件人: 李海波 派件中 派件员电话18684822604"
+        },
+        {
+            "time": "2019-5-8 23:17:46",
+            "status": "【长沙转运中心】 已发出 下一站 【湖南省长沙市火车站公司】"
+        },
+        {
+            "time": "2019-5-8 22:47:28",
+            "status": "【长沙转运中心】 已收入"
+        },
+        {
+            "time": "2019-5-7 22:41:27",
+            "status": "【济南转运中心】 已发出 下一站 【长沙转运中心】"
+        },
+        {
+            "time": "2019-5-7 22:37:27",
+            "status": "【济南转运中心】 已收入"
+        },
+        {
+            "time": "2019-5-7 19:05:04",
+            "status": "【山东省淄博市淄川区三部】 已发出 下一站 【山东省淄博市公司】"
+        },
+        {
+            "time": "2019-5-7 18:33:15",
+            "status": "【山东省淄博市淄川区三部公司】 已打包"
+        },
+        {
+            "time": "2019-5-7 18:02:27",
+            "status": "【山东省淄博市淄川区三部公司】 已收件"
+        }
+    ],
+    "original": {
+        "status": "0",
+        "msg": "ok",
+        "result": {
+            "number": "xxxxxxxxxx",
+            "type": "yto",
+            "list": [
+                {
+                    "time": "2019-5-9 12:44:40",
+                    "status": "客户 签收人: 邮件收发章 已签收 感谢使用圆通速递，期待再次为您服务"
+                },
+                {
+                    "time": "2019-5-9 8:37:02",
+                    "status": "【湖南省长沙市火车站公司】 派件人: xxx 派件中 派件员电话xxxx"
+                },
+                {
+                    "time": "2019-5-8 23:17:46",
+                    "status": "【长沙转运中心】 已发出 下一站 【湖南省长沙市火车站公司】"
+                },
+                {
+                    "time": "2019-5-8 22:47:28",
+                    "status": "【长沙转运中心】 已收入"
+                },
+                {
+                    "time": "2019-5-7 22:41:27",
+                    "status": "【济南转运中心】 已发出 下一站 【长沙转运中心】"
+                },
+                {
+                    "time": "2019-5-7 22:37:27",
+                    "status": "【济南转运中心】 已收入"
+                },
+                {
+                    "time": "2019-5-7 19:05:04",
+                    "status": "【山东省淄博市淄川区三部】 已发出 下一站 【山东省淄博市公司】"
+                },
+                {
+                    "time": "2019-5-7 18:33:15",
+                    "status": "【山东省淄博市淄川区三部公司】 已打包"
+                },
+                {
+                    "time": "2019-5-7 18:02:27",
+                    "status": "【山东省淄博市淄川区三部公司】 已收件"
+                }
+            ],
+            "deliverystatus": "3",
+            "issign": "1",
+            "expName": "圆通速递",
+            "expSite": "www.yto.net.cn ",
+            "expPhone": "95554",
+            "logo": "http://img3.fegine.com/express/yto.jpg",
+            "courier": "",
+            "courierPhone": ""
+        }
+    }
+}
 ```	
+你也可以这样获取：
 
- ### 获取物流公司信息	
+```
+$order['company']; // 'zto'
+$order['list']; // ....
+$order['original']; // 获取接口原始返回信息
+...
 
-```	
-$response = $logistics->companies('zto');	
-```	
-示例：	
+```
 
-```json	
-{	
-    "status": "200",	
-    "msg": "sucess",	
-    "result": {	
-        "ZTO": "中通快递"	
-    }	
-}	
-```	
+或者这样：
 
-示例：	
+```
+$order->getCode(); // 状态码
+$order->getMsg(); // 状态信息
+$order->getCompany(); // 物流公司简称
+$order->getNo(); // 物流单号
+$order->getStatus(); // 当前物流单详情
+$order->getCourier(); // 快递员姓名
+$order->getCourierPhone(); // 快递员手机号
+$order->getList(); // 物流单状态详情
+$order->getOriginal(); // 获取接口原始返回信息
+```
 
-```json	
-{	
-    "status": "200",	
-    "msg": "sucess",	
-    "result": {	
-        "AAEWEB": "AAE",	
-        "ARAMEX": "Aramex",	
-        "DHL": "DHL国内件",	
-        "DHL_EN": "DHL国际件",	
-        "DPEX": "DPEX",	
-        "DEXP": "D速",	
-        "EMS": "EMS(国内和国际)",	
-        "EWE": "EWE",	
-        "FEDEX": "FEDEX",	
-        "FEDEXIN": "FedEx国际",	
-        "PCA": "PCA",	
-        "TNT": "TNT",	
-        "UPS": "UPS",
-    }	
-}	
-```	
 
 ### 参数说明	
 
 ```	
- string   show(string $no, string $type = null)	
+ string   order(string $no, string $type = null)	
 ```	
 
 > - `$no` - 物流单号/比如：“805741929402797742”	
 > - `$type` - 快递公司字母简写：不知道可不填 95% 能自动识别，填写查询速度会更快/比如：“zto”	
 ```	
- string   getLogisticsCompany(string $type = 'ALL')	
-```	
-
-> - `$type` - 快递编码 或 不填写获取列表/比如：“zto” 或者（type：ALL）；	
 
 ### 在 Laravel 中使用	
 
@@ -178,9 +204,11 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show(Logistics $logistics) 	
+    public function show(Logistics $logistics, $no) 	
     {	
-        $response = $logistics->show('xxxxx');	
+        $order = $logistics->order($no);
+        
+        return $order;	// $order->getList(); .....
     }	
     .	
     .	
@@ -193,9 +221,9 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show() 	
+    public function show($no) 	
     {	
-        $response = app('logistics')->show('xxxxx');	
+        $response = app('logistics')->order($no);	
     }	
     .	
     .	

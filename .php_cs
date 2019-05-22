@@ -1,8 +1,8 @@
 <?php
 $header = <<<EOF
-This file is part of the onechoo/logistics-inquiry.
+This file is part of the finecho/logistics.
 
-(c) onechoo <liuhao25@foxmail.com>
+(c) finecho <liuhao25@foxmail.com>
 
 This source file is subject to the MIT license that is bundled.
 EOF;

@@ -16,15 +16,8 @@ namespace Finecho\Logistics\Contracts;
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-interface Resolvable
+interface ProviderInterface
 {
-    /**
-     * @param string $no
-     *
-     * @return array
-     */
-    public function show($no);
-
     /**
      * @return string
      */

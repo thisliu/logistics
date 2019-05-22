@@ -11,16 +11,20 @@
 
 namespace Finecho\Logistics\Providers;
 
-use Finecho\Logistics\Contracts\Resolvable;
+use Finecho\Logistics\Contracts\ProviderInterface;
 
 /**
  * Class Base.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-abstract class Base implements Resolvable
+abstract class AbstractProvider implements ProviderInterface
 {
     const DEFAULT_TIMEOUT = 5.0;
+
+    const GLOBAL_SUCCESS_CODE = 200;
+
+    const GLOBAL_SUCCESS_MSG = 'OK';
 
     /**
      * @var array
@@ -36,4 +40,11 @@ abstract class Base implements Resolvable
     {
         $this->config = $config;
     }
+
+    /**
+     * @param $logisticsOrder
+     *
+     * @return \Finecho\Logistics\Order
+     */
+    abstract protected function mapLogisticsOrderToObject($logisticsOrder);
 }

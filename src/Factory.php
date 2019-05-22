@@ -56,7 +56,7 @@ class Factory
      *
      * @return string
      */
-    public static function formatClassName(string $provider)
+    public static function formatClassName($provider)
     {
         $provider = ucfirst($provider);
 
