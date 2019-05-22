@@ -34,12 +34,19 @@ class Aliyun extends AbstractProvider
     const SUCCESS_STATUS = 0;
 
     const STATUS_ERROR = -1;
+
     const STATUS_COURIER_RECEIPT = 0;
+
     const STATUS_ON_THE_WAY = 1;
+
     const STATUS_SENDING_A_PIECE = 2;
+
     const STATUS_SIGNED = 3;
-    const STATUS_DELIVERY_FAILED  = 4;
+
+    const STATUS_DELIVERY_FAILED = 4;
+
     const STATUS_TROUBLESOME = 5;
+
     const STATUS_RETURN_RECEIPT = 6;
 
     const STATUS_LABELS = [

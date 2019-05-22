@@ -15,7 +15,7 @@ use Finecho\Logistics\Providers\Aliyun;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class AliyunProviderTest
+ * Class AliyunProviderTest.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
@@ -33,7 +33,7 @@ class AliyunProviderTest extends TestCase
 
             'aliyun' => [
                 'app_code' => 'xxxxxxx',
-            ]];
+            ], ];
 
         $response = [
             'status' => 0,
@@ -48,7 +48,7 @@ class AliyunProviderTest extends TestCase
             ],
         ];
 
-        $aliyun = \Mockery::mock(Aliyun::class . '[get]', [$config])->shouldAllowMockingProtectedMethods();
+        $aliyun = \Mockery::mock(Aliyun::class.'[get]', [$config])->shouldAllowMockingProtectedMethods();
 
         $query = ['no' => '7521488'];
 
