@@ -14,7 +14,7 @@ namespace Finecho\Logistics;
 use Finecho\Logistics\Traits\HasAttributes;
 
 /**
- * Class Order
+ * Class Order.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
