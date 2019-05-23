@@ -148,7 +148,7 @@ class Aliyun extends AbstractProvider
      */
     protected function resetList($list)
     {
-        if (\array_intersect(['datetime', 'remark'], \array_keys(\current($list))) == ['datetime', 'remark']) {
+        if (\array_intersect(['datetime', 'remark'], \array_keys(\current($list))) == ['datetime', 'remark'] || empty($list)) {
             return $list;
         }
 

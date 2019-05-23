@@ -41,7 +41,7 @@ class AliyunProviderTest extends TestCase
             'result' => [
                 'number' => '7521488',
                 'type' => 'zto',
-                'list' => [],
+                'list' => [['datetime' => '2019-05-23', 'remark' => '已发货'], ['datetime' => '2019-05-24', 'remark' => '已签收']],
                 'deliverystatus' => 3,
                 'courier' => '',
                 'courierPhone' => '',
