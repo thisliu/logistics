@@ -132,6 +132,6 @@ class Order implements \ArrayAccess, OrderInterface, \JsonSerializable, \Seriali
      */
     public function unserialize($serialized)
     {
-        $this->attributes = \unserialize($serialized) ?? [];
+        $this->attributes = \unserialize($serialized) ?: [];
     }
 }
