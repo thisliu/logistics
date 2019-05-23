@@ -126,6 +126,8 @@ class Aliyun extends AbstractProvider
     {
         $status = \intval($logisticsOrder['result']['deliverystatus']);
 
+        $list = $this->resetList($logisticsOrder['result']['list']);
+
         return new Order([
             'code' => self::GLOBAL_SUCCESS_CODE,
             'msg' => self::GLOBAL_SUCCESS_MSG,
@@ -135,7 +137,25 @@ class Aliyun extends AbstractProvider
             'status' => \in_array($status, \array_keys(self::STATUS_LABELS)) ? self::STATUS_LABELS[$status] : self::STATUS_LABELS[self::STATUS_ERROR],
             'courier' => $logisticsOrder['result']['courier'],
             'courierPhone' => $logisticsOrder['result']['courierPhone'],
-            'list' => $logisticsOrder['result']['list'],
+            'list' => $list,
         ]);
+    }
+
+    /**
+     * @param array $list
+     *
+     * @return array
+     */
+    protected function resetList($list)
+    {
+        if (\array_intersect(['datetime', 'remark'], \array_keys(\current($list))) == ['datetime', 'remark']) {
+            return $list;
+        }
+
+        \array_walk($list, function (&$list, $key, $names) {
+            $list = array_combine($names, $list);
+        }, ['datetime', 'remark']);
+
+        return $list;
     }
 }

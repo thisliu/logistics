@@ -47,4 +47,11 @@ abstract class AbstractProvider implements ProviderInterface
      * @return \Finecho\Logistics\Order
      */
     abstract protected function mapLogisticsOrderToObject($logisticsOrder);
+
+    /**
+     * @param array $list
+     *
+     * @return array
+     */
+    abstract protected function resetList($list);
 }
