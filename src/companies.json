@@ -1,0 +1,30 @@
+[
+    {
+        "name": "顺丰",
+        "aliases": {
+            "aliyun": "SFEXPRESS",
+            "juhe": "sf"
+        }
+    },
+    {
+        "name": "申通",
+        "aliases": {
+            "aliyun": "STO",
+            "juhe": "sto"
+        }
+    },
+    {
+        "name": "中通快递",
+        "aliases": {
+            "aliyun": "ZTO",
+            "juhe": "zto"
+        }
+    },
+    {
+        "name": "圆通快递",
+        "aliases": {
+            "aliyun": "YTO",
+            "juhe": "yt"
+        }
+    }
+]

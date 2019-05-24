@@ -62,19 +62,28 @@ class Aliyun extends AbstractProvider
 
     /**
      * @param      $no
-     * @param null $type
+     * @param null $company
      *
      * @return \Finecho\Logistics\Order
      *
      * @throws \Finecho\Logistics\Exceptions\HttpException
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
+     * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
      */
-    public function order($no, $type = null)
+    public function order($no, $company = null)
     {
         $params = \array_filter([
             'no' => $no,
-            'type' => $type,
+            'company' => $company,
         ]);
+
+        if (\in_array('company', \array_keys($params))) {
+            $params['type'] = $this->getLogisticsCompanyAliases($params['company']);
+
+            unset($params['company']);
+
+            $this->company = $company;
+        }
 
         $headers = ['Authorization' => \sprintf('APPCODE %s', $this->config['aliyun']['app_code'])];
 
@@ -132,7 +141,7 @@ class Aliyun extends AbstractProvider
             'code' => self::GLOBAL_SUCCESS_CODE,
             'msg' => self::GLOBAL_SUCCESS_MSG,
 
-            'company' => $logisticsOrder['result']['type'],
+            'company' => $this->company ?: $logisticsOrder['result']['expName'],
             'no' => $logisticsOrder['result']['number'],
             'status' => \in_array($status, \array_keys(self::STATUS_LABELS)) ? self::STATUS_LABELS[$status] : self::STATUS_LABELS[self::STATUS_ERROR],
             'courier' => $logisticsOrder['result']['courier'],

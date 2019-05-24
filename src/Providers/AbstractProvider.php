@@ -12,6 +12,7 @@
 namespace Finecho\Logistics\Providers;
 
 use Finecho\Logistics\Contracts\ProviderInterface;
+use Finecho\Logistics\Exceptions\InvalidArgumentException;
 
 /**
  * Class Base.
@@ -25,6 +26,8 @@ abstract class AbstractProvider implements ProviderInterface
     const GLOBAL_SUCCESS_CODE = 200;
 
     const GLOBAL_SUCCESS_MSG = 'OK';
+
+    protected $company = '';
 
     /**
      * @var array
@@ -54,4 +57,34 @@ abstract class AbstractProvider implements ProviderInterface
      * @return array
      */
     abstract protected function resetList($list);
+
+    /**
+     * @param string $company
+     *
+     * @return string
+     *
+     * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
+     */
+    public function getLogisticsCompanyAliases($company)
+    {
+        $companies = \json_decode(\file_get_contents(__DIR__.'/../companies.json'), true);
+
+        $index = \array_search($company, \array_column($companies, 'name'));
+
+        if ($index) {
+            return $companies[$index]['aliases'][\strtolower($this->getProviderName())];
+        }
+
+        throw new InvalidArgumentException();
+    }
+
+    /**
+     * @return array
+     */
+    public function companies()
+    {
+        $companies = \json_decode(\file_get_contents(__DIR__.'/../companies.json'), true);
+
+        return \array_column($companies, 'name');
+    }
 }
