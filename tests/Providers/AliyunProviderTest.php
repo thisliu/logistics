@@ -45,6 +45,7 @@ class AliyunProviderTest extends TestCase
                 'deliverystatus' => 3,
                 'courier' => '',
                 'courierPhone' => '',
+                'expName' => '',
             ],
         ];
 
