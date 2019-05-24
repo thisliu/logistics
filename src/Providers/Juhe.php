@@ -82,6 +82,7 @@ class Juhe extends AbstractProvider
      * @param null $company
      *
      * @return \Finecho\Logistics\Order
+     *
      * @throws \Finecho\Logistics\Exceptions\HttpException
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
@@ -124,6 +125,7 @@ class Juhe extends AbstractProvider
      * @param int    $SUCCESS_STATUS
      *
      * @return array
+     *
      * @throws \Finecho\Logistics\Exceptions\HttpException
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      */
