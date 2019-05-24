@@ -12,13 +12,14 @@
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
  * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
 
+ 
 ## 安装	
 
 ```
 $ composer require finecho/logistics -vvv	
 ```	
 
- ## 使用	
+## 使用	
 
 ```php	
 require __DIR__ .'/vendor/autoload.php';
@@ -35,25 +36,29 @@ $config = [
 $logistics = new Logistics($config);
 ```	
 
- ### 获取物流公司
+###  获取物流公司列表
  
- $companies = $logistics->companies();
- 
- 示例：
- ```JSON
+```php	
+$companies = $logistics->companies();	
+```	
+
+示例:
+
+```json
 [
     "顺丰",
     "申通",
     "中通快递",
     "圆通快递"
 ]
- ```
+```
 
 ###  获取物流信息	
 
 ```php	
 $order = $logistics->order('805741929402797742', '圆通快递');
-```	
+```
+
 示例：	
 
 ```json	
@@ -104,7 +109,7 @@ $order = $logistics->order('805741929402797742', '圆通快递');
 你也可以这样获取：
 
 ```
-$order['company']; // '圆通快递'
+$order['company']; // '圆通快递' （因为各个平台对公司的名称有所不一致，所以查询结果或许会有些许差别）
 $order['list']; // ....
 $order['original']; // 获取接口原始返回信息
 ...
