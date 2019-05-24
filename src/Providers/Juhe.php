@@ -13,51 +13,68 @@ namespace Finecho\Logistics\Providers;
 
 use Finecho\Logistics\Exceptions\HttpException;
 use Finecho\Logistics\Exceptions\InquiryErrorException;
+use Finecho\Logistics\Exceptions\InvalidArgumentException;
 use Finecho\Logistics\Order;
 use Finecho\Logistics\Traits\HasHttpRequest;
 
 /**
- * Class Aliyun.
+ * Class Juhe.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-class Aliyun extends AbstractProvider
+class Juhe extends AbstractProvider
 {
     use HasHttpRequest;
 
-    const PROVIDER_NAME = 'Aliyun';
+    const PROVIDER_NAME = 'Juhe';
 
-    const LOGISTICS_INFO_URL = 'http://wuliu.market.alicloudapi.com/kdi';
+    const LOGISTICS_INFO_URL = 'http://v.juhe.cn/exp/index';
 
-    const LOGISTICS_COMPANY_URL = 'http://wuliu.market.alicloudapi.com/getExpressList';
-
-    const SUCCESS_STATUS = 0;
+    const SUCCESS_STATUS = 200;
 
     const STATUS_ERROR = -1;
 
-    const STATUS_COURIER_RECEIPT = 0;
+    const STATUS_NO_CONTENT = 0;
 
-    const STATUS_ON_THE_WAY = 1;
+    const STATUS_PENDING = 'PENDING';
 
-    const STATUS_SENDING_A_PIECE = 2;
+    const STATUS_NO_RECORD = 'NO_RECORD';
 
-    const STATUS_SIGNED = 3;
+    const STATUS_IN_TRANSIT = 'IN_TRANSIT';
 
-    const STATUS_DELIVERY_FAILED = 4;
+    const STATUS_DELIVERING = 'DELIVERING';
 
-    const STATUS_TROUBLESOME = 5;
+    const STATUS_SIGNED = 'SIGNED';
 
-    const STATUS_RETURN_RECEIPT = 6;
+    const STATUS_REJECTED = 'REJECTED';
+
+    const STATUS_PROBLEM = 'PROBLEM';
+
+    const STATUS_INVALID = 'INVALID';
+
+    const STATUS_TIMEOUT = 'TIMEOUT';
+
+    const STATUS_FAILED = 'FAILED';
+
+    const STATUS_SEND_BACK = 'SEND_BACK';
+
+    const STATUS_TAKING = 'TAKING';
 
     const STATUS_LABELS = [
         self::STATUS_ERROR => '异常',
-        self::STATUS_COURIER_RECEIPT => '快递收件(揽件)',
-        self::STATUS_ON_THE_WAY => '在途中',
-        self::STATUS_SENDING_A_PIECE => '正在派件',
+        self::STATUS_NO_CONTENT => '无信息',
+        self::STATUS_PENDING => '待查询',
+        self::STATUS_NO_RECORD => '无记录',
+        self::STATUS_IN_TRANSIT => '运输中',
+        self::STATUS_DELIVERING => '派送中',
         self::STATUS_SIGNED => '已签收',
-        self::STATUS_DELIVERY_FAILED => '派送失败',
-        self::STATUS_TROUBLESOME => '疑难件',
-        self::STATUS_RETURN_RECEIPT => '退件签收',
+        self::STATUS_REJECTED => '拒签',
+        self::STATUS_PROBLEM => '疑难件',
+        self::STATUS_INVALID => '无效件',
+        self::STATUS_TIMEOUT => '超时件',
+        self::STATUS_FAILED => '派送失败',
+        self::STATUS_SEND_BACK => '退回',
+        self::STATUS_TAKING => '揽件',
     ];
 
     /**
@@ -65,7 +82,6 @@ class Aliyun extends AbstractProvider
      * @param null $company
      *
      * @return \Finecho\Logistics\Order
-     *
      * @throws \Finecho\Logistics\Exceptions\HttpException
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
@@ -73,21 +89,22 @@ class Aliyun extends AbstractProvider
     public function order($no, $company = null)
     {
         $params = \array_filter([
+            'key' => $this->config[\strtolower(self::PROVIDER_NAME)]['app_code'],
             'no' => $no,
             'company' => $company,
         ]);
 
         if (\in_array('company', \array_keys($params))) {
-            $params['type'] = $this->getLogisticsCompanyAliases($params['company']);
+            $params['com'] = $this->getLogisticsCompanyAliases($params['company']);
 
             unset($params['company']);
 
             $this->company = $company;
+        } else {
+            throw new InvalidArgumentException();
         }
 
-        $headers = ['Authorization' => \sprintf('APPCODE %s', $this->config[\strtolower(self::PROVIDER_NAME)]['app_code'])];
-
-        $response = $this->sendRequest(self::LOGISTICS_INFO_URL, $params, $headers, self::SUCCESS_STATUS);
+        $response = $this->sendRequest(self::LOGISTICS_INFO_URL, $params, [], self::SUCCESS_STATUS);
 
         return $this->mapLogisticsOrderToObject($response)->merge(['original' => $response]);
     }
@@ -107,7 +124,6 @@ class Aliyun extends AbstractProvider
      * @param int    $SUCCESS_STATUS
      *
      * @return array
-     *
      * @throws \Finecho\Logistics\Exceptions\HttpException
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      */
@@ -119,8 +135,8 @@ class Aliyun extends AbstractProvider
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
 
-        if ($SUCCESS_STATUS != $result['status']) {
-            throw new InquiryErrorException($result['msg'], $result['status'], $result);
+        if ($SUCCESS_STATUS != $result['resultcode']) {
+            throw new InquiryErrorException($result['reason'], $result['resultcode'], $result);
         }
 
         return $result;
@@ -133,7 +149,7 @@ class Aliyun extends AbstractProvider
      */
     protected function mapLogisticsOrderToObject($logisticsOrder)
     {
-        $status = \intval($logisticsOrder['result']['deliverystatus']);
+        $status = \intval($logisticsOrder['result']['status_detail']);
 
         $list = $this->resetList($logisticsOrder['result']['list']);
 
@@ -141,11 +157,9 @@ class Aliyun extends AbstractProvider
             'code' => self::GLOBAL_SUCCESS_CODE,
             'msg' => self::GLOBAL_SUCCESS_MSG,
 
-            'company' => $this->company ?: $logisticsOrder['result']['expName'],
-            'no' => $logisticsOrder['result']['number'],
+            'company' => $this->company ?: $logisticsOrder['result']['company'],
+            'no' => $logisticsOrder['result']['no'],
             'status' => \in_array($status, \array_keys(self::STATUS_LABELS)) ? self::STATUS_LABELS[$status] : self::STATUS_LABELS[self::STATUS_ERROR],
-            'courier' => $logisticsOrder['result']['courier'],
-            'courierPhone' => $logisticsOrder['result']['courierPhone'],
             'list' => $list,
         ]);
     }

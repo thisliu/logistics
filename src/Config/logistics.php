@@ -12,8 +12,6 @@
 return [
     'provider' => 'aliyun',
 
-    'format' => true,
-
     'aliyun' => [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],

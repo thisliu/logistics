@@ -5,17 +5,14 @@
  [![Build Status](https://travis-ci.org/finecho/logistics.svg?branch=master)](https://travis-ci.org/finecho/logistics)	
 ![StyleCI build status](https://github.styleci.io/repos/185047335/shield) 	
 
- ## 介绍
+## 介绍
  
- 目前支持一家平台（后续会慢慢添加）
+ 目前支持两家平台（后续会慢慢添加）
  
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
- 
- ## 配置	
- 
- 在使用本扩展之前，你需要去 [阿里云市场](https://homenew.console.aliyun.com/) 注册账号，然后购买服务，获取服务的 APP Code。	
+ * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
 
- ## 安装	
+## 安装	
 
 ```
 $ composer require finecho/logistics -vvv	
@@ -29,8 +26,8 @@ require __DIR__ .'/vendor/autoload.php';
 use Finecho\Logistics\Logistics;
 
 $config = [
-    'provider' => 'aliyun',
-    'aliyun' => [
+    'provider' => 'aliyun', // 'juhe'
+    'aliyun' => [ // 'juhe'
         'app_code' => 'xxxxxxxx',
     ]
 ];
@@ -38,10 +35,24 @@ $config = [
 $logistics = new Logistics($config);
 ```	
 
- ###  获取物流信息	
+ ### 获取物流公司
+ 
+ $companies = $logistics->companies();
+ 
+ 示例：
+ ```JSON
+[
+    "顺丰",
+    "申通",
+    "中通快递",
+    "圆通快递"
+]
+ ```
+
+###  获取物流信息	
 
 ```php	
-$order = $logistics->order('XXXXX');	
+$order = $logistics->order('805741929402797742', '圆通快递');
 ```	
 示例：	
 
@@ -49,109 +60,51 @@ $order = $logistics->order('XXXXX');
 {
     "code": 200,
     "msg": "OK",
-    "company": "yto",
-    "no": "xxxxxxxxx",
-    "status": "已签收",
-    "courier": "",
-    "courierPhone": "",
+    "company": "圆通快递",
+    "no": "805741929402797742",
+    "status": "无信息",
     "list": [
         {
-            "datetime": "2019-5-9 12:44:40",
-            "remark": "客户 签收人: 邮件收发章 已签收 感谢使用圆通速递，期待再次为您服务"
+            "datetime": "2019-05-07 18:02:27",
+            "remark": "山东省淄博市淄川区三部公司取件人:司健（15553333300）已收件",
+            "zone": ""
         },
         {
-            "datetime": "2019-5-9 8:37:02",
-            "remark": "【湖南省长沙市火车站公司】 派件人: 李海波 派件中 派件员电话18684822604"
-        },
-        {
-            "datetime": "2019-5-8 23:17:46",
-            "remark": "【长沙转运中心】 已发出 下一站 【湖南省长沙市火车站公司】"
-        },
-        {
-            "datetime": "2019-5-8 22:47:28",
-            "remark": "【长沙转运中心】 已收入"
-        },
-        {
-            "datetime": "2019-5-7 22:41:27",
-            "remark": "【济南转运中心】 已发出 下一站 【长沙转运中心】"
-        },
-        {
-            "datetime": "2019-5-7 22:37:27",
-            "remark": "【济南转运中心】 已收入"
-        },
-        {
-            "datetime": "2019-5-7 19:05:04",
-            "remark": "【山东省淄博市淄川区三部】 已发出 下一站 【山东省淄博市公司】"
-        },
-        {
-            "datetime": "2019-5-7 18:33:15",
-            "remark": "【山东省淄博市淄川区三部公司】 已打包"
-        },
-        {
-            "datetime": "2019-5-7 18:02:27",
-            "remark": "【山东省淄博市淄川区三部公司】 已收件"
+            "datetime": "2019-05-09 12:44:40",
+            "remark": "快件已签收签收人:邮件收发章感谢使用圆通速递，期待再次为您服务",
+            "zone": ""
         }
     ],
     "original": {
-        "status": "0",
-        "msg": "ok",
+        "resultcode": "200",
+        "reason": "成功的返回",
         "result": {
-            "number": "xxxxxxxxxx",
-            "type": "yto",
+            "company": "圆通",
+            "com": "yt",
+            "no": "805741929402797742",
+            "status": "1",
+            "status_detail": null,
             "list": [
                 {
-                    "time": "2019-5-9 12:44:40",
-                    "status": "客户 签收人: 邮件收发章 已签收 感谢使用圆通速递，期待再次为您服务"
+                    "datetime": "2019-05-07 18:02:27",
+                    "remark": "山东省淄博市淄川区三部公司取件人:司健（15553333300）已收件",
+                    "zone": ""
                 },
                 {
-                    "time": "2019-5-9 8:37:02",
-                    "status": "【湖南省长沙市火车站公司】 派件人: xxx 派件中 派件员电话xxxx"
-                },
-                {
-                    "time": "2019-5-8 23:17:46",
-                    "status": "【长沙转运中心】 已发出 下一站 【湖南省长沙市火车站公司】"
-                },
-                {
-                    "time": "2019-5-8 22:47:28",
-                    "status": "【长沙转运中心】 已收入"
-                },
-                {
-                    "time": "2019-5-7 22:41:27",
-                    "status": "【济南转运中心】 已发出 下一站 【长沙转运中心】"
-                },
-                {
-                    "time": "2019-5-7 22:37:27",
-                    "status": "【济南转运中心】 已收入"
-                },
-                {
-                    "time": "2019-5-7 19:05:04",
-                    "status": "【山东省淄博市淄川区三部】 已发出 下一站 【山东省淄博市公司】"
-                },
-                {
-                    "time": "2019-5-7 18:33:15",
-                    "status": "【山东省淄博市淄川区三部公司】 已打包"
-                },
-                {
-                    "time": "2019-5-7 18:02:27",
-                    "status": "【山东省淄博市淄川区三部公司】 已收件"
+                    "datetime": "2019-05-09 12:44:40",
+                    "remark": "快件已签收签收人:邮件收发章感谢使用圆通速递，期待再次为您服务",
+                    "zone": ""
                 }
-            ],
-            "deliverystatus": "3",
-            "issign": "1",
-            "expName": "圆通速递",
-            "expSite": "www.yto.net.cn ",
-            "expPhone": "95554",
-            "logo": "http://img3.fegine.com/express/yto.jpg",
-            "courier": "",
-            "courierPhone": ""
-        }
+            ]
+        },
+        "error_code": 0
     }
 }
 ```	
 你也可以这样获取：
 
 ```
-$order['company']; // 'zto'
+$order['company']; // '圆通快递'
 $order['list']; // ....
 $order['original']; // 获取接口原始返回信息
 ...
@@ -176,11 +129,14 @@ $order->getOriginal(); // 获取接口原始返回信息
 ### 参数说明	
 
 ```	
- string   order(string $no, string $type = null)	
+ string   order(string $no, string $company = null)	
 
 ```
-> - `$no` - 物流单号/比如：“805741929402797742”	
-> - `$type` - 快递公司字母简写：不知道可不填 95% 能自动识别，填写查询速度会更快/比如：“zto”	
+> - `$no` - 物流单号	
+> - `$company` - 快递公司名（通过 $companies = $logistics->companies(); 获取)
+
+* aliyun ：$company 可选
+* juhe : $company 必填
 
 ### 在 Laravel 中使用	
 
@@ -190,7 +146,7 @@ $order->getOriginal(); // 获取接口原始返回信息
 php artisan vendor:publish --provider="Finecho\Logistics\ServiceProvider"
 ```
 
-然后在 `.env` 中配置 `LOGISTICS_APP_CODE` ：	
+然后在 `.env` 中配置 `LOGISTICS_APP_CODE` ，同时修改 config/logistics.php 中配置信息：	
 
 ```env	
 LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx	
@@ -204,9 +160,9 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show(Logistics $logistics, $no) 	
+    public function show(Logistics $logistics, $no, $company) 	
     {	
-        $order = $logistics->order($no);
+        $order = $logistics->order($no, $company);
         
         return $order;	// $order->getList(); .....
     }	
@@ -221,9 +177,9 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show($no) 	
+    public function show($no, $company) 	
     {	
-        $response = app('logistics')->order($no);	
+        $response = app('logistics')->order($no, $company);	
     }	
     .	
     .	
@@ -232,7 +188,13 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
 
 ## 参考	
 
-- [阿里云市场：全国快递物流查询-快递查询接口](https://market.aliyun.com/products/56928004/cmapi021863.html?spm=5176.2020520132.101.2.7cd87218IbLYU3#sku=yuncode1586300000)	
+- [PHP 扩展包实战教程 - 从入门到发布](https://learnku.com/courses/creating-package)	
+- [overtrue/easy-sms](https://github.com/overtrue/easy-sms)	
+- [icecho/easy-ip](https://github.com/icecho/easy-ip)	
+
+## 感谢
+
+- 感谢[超哥](https://github.com/overtrue)和[icecho](https://github.com/icecho)为我第一个扩展包的悉心指导。
 
 ## License	
 
