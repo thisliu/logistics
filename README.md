@@ -11,10 +11,6 @@
  
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
  
- ## 配置	
- 
- 在使用本扩展之前，你需要去 [阿里云市场](https://homenew.console.aliyun.com/) 注册账号，然后购买服务，获取服务的 APP Code。	
-
  ## 安装	
 
 ```
@@ -37,11 +33,26 @@ $config = [
 
 $logistics = new Logistics($config);
 ```	
+ ###  获取物流公司列表
+ 
+```php	
+$companies = $logistics->companies();	
+```	
+示例:
 
+```json
+[
+    "顺丰",
+    "申通",
+    "中通快递",
+    "圆通快递"
+]
+```
+ 
  ###  获取物流信息	
 
 ```php	
-$order = $logistics->order('XXXXX');	
+$order = $logistics->order('XXXXX', '圆通快递');	
 ```	
 示例：	
 
@@ -151,7 +162,7 @@ $order = $logistics->order('XXXXX');
 你也可以这样获取：
 
 ```
-$order['company']; // 'zto'
+$order['company']; // '圆通快递' （因为各个平台对公司的名称有所不一致，所以查询结果或许会有些许差别）
 $order['list']; // ....
 $order['original']; // 获取接口原始返回信息
 ...
@@ -176,11 +187,11 @@ $order->getOriginal(); // 获取接口原始返回信息
 ### 参数说明	
 
 ```	
- string   order(string $no, string $type = null)	
+ string   order(string $no, string $company = null)	
 
 ```
 > - `$no` - 物流单号/比如：“805741929402797742”	
-> - `$type` - 快递公司字母简写：不知道可不填 95% 能自动识别，填写查询速度会更快/比如：“zto”	
+> - `$company` - 快递公司名称，如：圆通快递（具体请参考 $companies = $logistics->companies();)
 
 ### 在 Laravel 中使用	
 
@@ -204,9 +215,9 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show(Logistics $logistics, $no) 	
+    public function show(Logistics $logistics, $no, $company) 	
     {	
-        $order = $logistics->order($no);
+        $order = $logistics->order($no, $company);
         
         return $order;	// $order->getList(); .....
     }	
@@ -221,9 +232,9 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     .	
     .	
     .	
-    public function show($no) 	
+    public function show($no, $company) 	
     {	
-        $response = app('logistics')->order($no);	
+        $response = app('logistics')->order($no, $company);	
     }	
     .	
     .	
@@ -233,6 +244,10 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
 ## 参考	
 
 - [阿里云市场：全国快递物流查询-快递查询接口](https://market.aliyun.com/products/56928004/cmapi021863.html?spm=5176.2020520132.101.2.7cd87218IbLYU3#sku=yuncode1586300000)	
+- [PHP 扩展包实战教程 - 从入门到发布](https://learnku.com/courses/creating-package)
+- [icecho/easy-ip](https://github.com/icecho/easy-ip)
+- [overtrue/easy-sms](https://github.com/overtrue/easy-sms)
+
 
 ## License	
 
