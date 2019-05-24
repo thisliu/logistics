@@ -177,18 +177,18 @@ $order->getOriginal(); // 获取接口原始返回信息
 
 ```	
  string   order(string $no, string $type = null)	
-```	
 
+```
 > - `$no` - 物流单号/比如：“805741929402797742”	
 > - `$type` - 快递公司字母简写：不知道可不填 95% 能自动识别，填写查询速度会更快/比如：“zto”	
-```	
 
 ### 在 Laravel 中使用	
 
 生成配置文件
-```bash
+
+```PHP
 php artisan vendor:publish --provider="Finecho\Logistics\ServiceProvider"
-```	
+```
 
 然后在 `.env` 中配置 `LOGISTICS_APP_CODE` ：	
 
@@ -227,7 +227,7 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
     }	
     .	
     .	
-   .	
+    .
  ```	
 
 ## 参考	
