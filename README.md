@@ -199,7 +199,7 @@ LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx
 
 ## 感谢
 
-- 感谢[超哥](https://github.com/overtrue)和[icecho](https://github.com/icecho)为我第一个扩展包的悉心指导。
+- 感谢 [超哥](https://github.com/overtrue) 和 [icecho](https://github.com/icecho) 为我第一个扩展包的悉心指导。
 
 ## License	
 
