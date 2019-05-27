@@ -94,7 +94,7 @@ class Kuaidi100 extends AbstractProvider
 
             $response = $this->sendRequestGet(self::LOGISTICS_COM_CODE_URL, $query, []);
 
-            if(!\is_array($response)){
+            if (!\is_array($response)) {
                 $response = \json_decode($response, true);
             }
 
@@ -103,7 +103,7 @@ class Kuaidi100 extends AbstractProvider
             }
 
             $param['com'] = \current($response)['comCode'];
-        }else{
+        } else {
             $param['com'] = $this->getLogisticsCompanyAliases($company);
 
             $this->company = $company;
@@ -136,6 +136,7 @@ class Kuaidi100 extends AbstractProvider
      * @param array  $headers
      *
      * @return array
+     *
      * @throws \Finecho\Logistics\Exceptions\HttpException
      */
     protected function sendRequestGet($url, $params, $headers)
@@ -156,6 +157,7 @@ class Kuaidi100 extends AbstractProvider
      * @param int $SUCCESS_STATUS
      *
      * @return array
+     *
      * @throws \Finecho\Logistics\Exceptions\HttpException
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      */
@@ -167,7 +169,7 @@ class Kuaidi100 extends AbstractProvider
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
 
-        if(!\is_array($result)){
+        if (!\is_array($result)) {
             $result = \json_decode($result, true);
         }
 
@@ -229,6 +231,6 @@ class Kuaidi100 extends AbstractProvider
      */
     protected function generateSign($param, $key, $customer)
     {
-        return \strtoupper(\md5(\json_encode($param) . $key . $customer));
+        return \strtoupper(\md5(\json_encode($param).$key.$customer));
     }
 }
