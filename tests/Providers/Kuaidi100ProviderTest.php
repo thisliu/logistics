@@ -34,7 +34,7 @@ class Kuaidi100ProviderTest extends TestCase
             'kuaidi100' => [
                 'app_code' => 'xxxxxxx',
                 'customer' => 'xxxxxxx',
-            ],];
+            ], ];
 
         $response = [
             'msg' => 'OK',
@@ -45,7 +45,7 @@ class Kuaidi100ProviderTest extends TestCase
             'courierPhone' => '',
         ];
 
-        $kuaidi100 = \Mockery::mock(Kuaidi100::class . '[post]', [$config])->shouldAllowMockingProtectedMethods();
+        $kuaidi100 = \Mockery::mock(Kuaidi100::class.'[post]', [$config])->shouldAllowMockingProtectedMethods();
 
         $params = [
             'customer' => 'xxxxxxx',
