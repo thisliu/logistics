@@ -11,8 +11,8 @@
  
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
  * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
+ * 快递100 [Kuaidi100](https://www.kuaidi100.com/)
 
- 
 ## 安装	
 
 ```
@@ -27,10 +27,20 @@ require __DIR__ .'/vendor/autoload.php';
 use Finecho\Logistics\Logistics;
 
 $config = [
-    'provider' => 'aliyun', // 'juhe'
-    'aliyun' => [ // 'juhe'
+    'provider' => 'aliyun', // aliyun/juhe/kuaidi100
+    
+    'aliyun' => [
         'app_code' => 'xxxxxxxx',
-    ]
+    ],
+    
+    'juhe' => [
+         'app_code' => 'xxxxx',
+    ],
+    
+    'kuaidi100' => [
+         'app_code' => 'xxxxx',
+         'customer' => 'xxxxx',
+    ],
 ];
 
 $logistics = new Logistics($config);
@@ -48,15 +58,15 @@ $companies = $logistics->companies();
 [
     "顺丰",
     "申通",
-    "中通快递",
-    "圆通快递"
+    "中通",
+    "圆通"
 ]
 ```
 
 ###  获取物流信息	
 
 ```php	
-$order = $logistics->order('805741929402797742', '圆通快递');
+$order = $logistics->order('805741929402797742', '圆通');
 ```
 
 示例：	
@@ -65,7 +75,7 @@ $order = $logistics->order('805741929402797742', '圆通快递');
 {
     "code": 200,
     "msg": "OK",
-    "company": "圆通快递",
+    "company": "圆通",
     "no": "805741929402797742",
     "status": "无信息",
     "list": [
@@ -109,7 +119,7 @@ $order = $logistics->order('805741929402797742', '圆通快递');
 你也可以这样获取：
 
 ```
-$order['company']; // '圆通快递' （因为各个平台对公司的名称有所不一致，所以查询结果或许会有些许差别）
+$order['company']; // '圆通' （因为各个平台对公司的名称有所不一致，所以查询结果或许会有些许差别）
 $order['list']; // ....
 $order['original']; // 获取接口原始返回信息
 ...
@@ -142,6 +152,7 @@ $order->getOriginal(); // 获取接口原始返回信息
 
 * aliyun ：$company 可选
 * juhe : $company 必填
+* kuaidi100 : $company 可选（建议必填，不填查询结果不一定准确）
 
 ### 在 Laravel 中使用	
 
@@ -155,6 +166,7 @@ php artisan vendor:publish --provider="Finecho\Logistics\ServiceProvider"
 
 ```env	
 LOGISTICS_APP_CODE=xxxxxxxxxxxxxxxxx	
+LOGISTICS_CUSTOMER=xxxxxxxxxxxxxxxxx	// 快递100 customer
 ```
 
 可以用两种方式来获取 `Finecho\Logistics\Logistics;` 实例：	

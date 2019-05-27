@@ -15,4 +15,13 @@ return [
     'aliyun' => [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],
+
+    'juhe' => [
+        'app_code' => env('LOGISTICS_APP_CODE'),
+    ],
+
+    'kuaidi100' => [
+        'app_code' => env('LOGISTICS_APP_CODE'),
+        'customer' => env('LOGISTICS_CUSTOMER'),
+    ],
 ];
