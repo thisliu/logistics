@@ -55,7 +55,7 @@ class JuheProviderTest extends TestCase
         $juhe->shouldReceive('get')->with(
             'http://v.juhe.cn/exp/index', $query, [])->once()->andReturn($response);
 
-        $this->assertSame($response, $juhe->order('7521488', '圆通快递')->getOriginal());
+        $this->assertSame($response, $juhe->order('7521488', '圆通')->getOriginal());
     }
 
     public function tearDown()
