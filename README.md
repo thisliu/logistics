@@ -7,7 +7,7 @@
 
 ## 介绍
  
- 目前支持两家平台（后续会慢慢添加）
+ 目前支持三家平台
  
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
  * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
