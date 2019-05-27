@@ -71,7 +71,7 @@ abstract class AbstractProvider implements ProviderInterface
 
         $index = \array_search($company, \array_column($companies, 'name'));
 
-        if ($index) {
+        if ($index !== false) {
             return $companies[$index]['aliases'][\strtolower($this->getProviderName())];
         }
 
