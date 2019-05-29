@@ -12,7 +12,7 @@
 return [
     'provider' => 'aliyun',
 
-    'aliyun'    => [
+    'aliyun' => [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],
 
