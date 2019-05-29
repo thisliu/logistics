@@ -4,7 +4,8 @@
         "aliases": {
             "aliyun": "SFEXPRESS",
             "juhe": "sf",
-            "kuaidi100": "shunfeng"
+            "kuaidi100": "shunfeng",
+            "kdniao": "SF"
         }
     },
     {
@@ -12,7 +13,8 @@
         "aliases": {
             "aliyun": "STO",
             "juhe": "sto",
-            "kuaidi100": "shentong"
+            "kuaidi100": "shentong",
+            "kdniao": "STO"
         }
     },
     {
@@ -20,7 +22,8 @@
         "aliases": {
             "aliyun": "ZTO",
             "juhe": "zto",
-            "kuaidi100": "zhongtong"
+            "kuaidi100": "zhongtong",
+            "kdniao": "ZTO"
         }
     },
     {
@@ -28,7 +31,8 @@
         "aliases": {
             "aliyun": "ZTO56",
             "juhe": "ztoky",
-            "kuaidi100": ""
+            "kuaidi100": "",
+            "kdniao": "ZTO"
         }
     },
     {
@@ -36,7 +40,8 @@
         "aliases": {
             "aliyun": "YTO",
             "juhe": "yt",
-            "kuaidi100": "yuantong"
+            "kuaidi100": "yuantong",
+            "kdniao": "YTO"
         }
     },
     {
@@ -44,7 +49,8 @@
         "aliases": {
             "aliyun": "YUNDA",
             "juhe": "yd",
-            "kuaidi100": "yunda"
+            "kuaidi100": "yunda",
+            "kdniao": "YD"
         }
     },
     {
@@ -52,7 +58,8 @@
         "aliases": {
             "aliyun": "TTKDEX",
             "juhe": "tt",
-            "kuaidi100": "tiantian"
+            "kuaidi100": "tiantian",
+            "kdniao": "HHTT"
         }
     },
     {
@@ -60,7 +67,8 @@
         "aliases": {
             "aliyun": "EMS",
             "juhe": "ems",
-            "kuaidi100": "ems"
+            "kuaidi100": "ems",
+            "kdniao": "EMS"
         }
     },
     {
@@ -68,7 +76,8 @@
         "aliases": {
             "aliyun": "EMS",
             "juhe": "emsg",
-            "kuaidi100": "emsguoji"
+            "kuaidi100": "emsguoji",
+            "kdniao": "EMSGJ"
         }
     },
     {
@@ -84,7 +93,8 @@
         "aliases": {
             "aliyun": "",
             "juhe": "yzgn",
-            "kuaidi100": "youzhengguonei"
+            "kuaidi100": "youzhengguonei",
+            "kdniao": "YZBK"
         }
     },
     {
@@ -92,7 +102,8 @@
         "aliases": {
             "aliyun": "",
             "juhe": "ht",
-            "kuaidi100": "huitongkuaidi"
+            "kuaidi100": "huitongkuaidi",
+            "kdniao": ""
         }
     },
     {
@@ -100,7 +111,8 @@
         "aliases": {
             "aliyun": "QFKD",
             "juhe": "qf",
-            "kuaidi100": "quanfengkuaidi"
+            "kuaidi100": "quanfengkuaidi",
+            "kdniao": ""
         }
     },
     {
@@ -108,7 +120,8 @@
         "aliases": {
             "aliyun": "DEPPON",
             "juhe": "db",
-            "kuaidi100": "debangwuliu"
+            "kuaidi100": "debangwuliu",
+            "kdniao": "DBL"
         }
     },
     {
@@ -116,7 +129,8 @@
         "aliases": {
             "aliyun": "GTO",
             "juhe": "gt",
-            "kuaidi100": "guotongkuaidi"
+            "kuaidi100": "guotongkuaidi",
+            "kdniao": ""
         }
     },
     {
@@ -124,7 +138,8 @@
         "aliases": {
             "aliyun": "RFD",
             "juhe": "rfd",
-            "kuaidi100": "rufengda"
+            "kuaidi100": "rufengda",
+            "kdniao": "RFD"
         }
     },
     {
@@ -132,7 +147,8 @@
         "aliases": {
             "aliyun": "JD",
             "juhe": "jd",
-            "kuaidi100": "jd"
+            "kuaidi100": "jd",
+            "kdniao": "JD"
         }
     },
     {
@@ -140,7 +156,8 @@
         "aliases": {
             "aliyun": "ZJS",
             "juhe": "zjs",
-            "kuaidi100": "zhaijisong"
+            "kuaidi100": "zhaijisong",
+            "kdniao": "ZJS"
         }
     },
     {
@@ -148,7 +165,8 @@
         "aliases": {
             "aliyun": "FEDEXIN",
             "juhe": "fedex",
-            "kuaidi100": "fedexcn"
+            "kuaidi100": "fedexcn",
+            "kdniao": "FEDEX"
         }
     },
     {
@@ -156,7 +174,8 @@
         "aliases": {
             "aliyun": "FEDEXIN",
             "juhe": "fedex",
-            "kuaidi100": "fedex"
+            "kuaidi100": "fedex",
+            "kdniao": "FEDEX_GJ"
         }
     },
     {
@@ -164,7 +183,8 @@
         "aliases": {
             "aliyun": "UPS",
             "juhe": "ups",
-            "kuaidi100": "ups"
+            "kuaidi100": "ups",
+            "kdniao": "UPS"
         }
     },
     {
@@ -172,7 +192,8 @@
         "aliases": {
             "aliyun": "CRE",
             "juhe": "ztky",
-            "kuaidi100": ""
+            "kuaidi100": "",
+            "kdniao": "ZHWL"
         }
     },
     {
@@ -180,7 +201,8 @@
         "aliases": {
             "aliyun": "JIAJI",
             "juhe": "jiaji",
-            "kuaidi100": "jiajiwuliu"
+            "kuaidi100": "jiajiwuliu",
+            "kdniao": "CNEX"
         }
     },
     {
@@ -188,7 +210,8 @@
         "aliases": {
             "aliyun": "SURE",
             "juhe": "suer",
-            "kuaidi100": "suer"
+            "kuaidi100": "suer",
+            "kdniao": "SURE"
         }
     },
     {
@@ -196,7 +219,8 @@
         "aliases": {
             "aliyun": "XFEXPRESS",
             "juhe": "xfwl",
-            "kuaidi100": "xinfengwuliu"
+            "kuaidi100": "xinfengwuliu",
+            "kdniao": "XFEX"
         }
     },
     {
@@ -204,7 +228,8 @@
         "aliases": {
             "aliyun": "UC56",
             "juhe": "yousu",
-            "kuaidi100": "youshuwuliu"
+            "kuaidi100": "youshuwuliu",
+            "kdniao": "UC"
         }
     },
     {
@@ -212,7 +237,8 @@
         "aliases": {
             "aliyun": "ZYWL",
             "juhe": "zhongyou",
-            "kuaidi100": "zhongyouwuliu"
+            "kuaidi100": "zhongyouwuliu",
+            "kdniao": "ZYKD"
         }
     },
     {
@@ -220,7 +246,8 @@
         "aliases": {
             "aliyun": "HOAU",
             "juhe": "tdhy",
-            "kuaidi100": "tiandihuayu"
+            "kuaidi100": "tiandihuayu",
+            "kdniao": "HOAU"
         }
     },
     {
@@ -228,7 +255,8 @@
         "aliases": {
             "aliyun": "ANXINDA",
             "juhe": "axd",
-            "kuaidi100": "anxindakuaixi"
+            "kuaidi100": "anxindakuaixi",
+            "kdniao": ""
         }
     },
     {
@@ -236,7 +264,8 @@
         "aliases": {
             "aliyun": "FASTEXPRESS",
             "juhe": "kuaijie",
-            "kuaidi100": "kuaijiesudi"
+            "kuaidi100": "kuaijiesudi",
+            "kdniao": "DJKJWL"
         }
     },
     {
@@ -244,7 +273,8 @@
         "aliases": {
             "aliyun": "AAEWEB",
             "juhe": "aae",
-            "kuaidi100": "aae"
+            "kuaidi100": "aae",
+            "kdniao": "AAE"
         }
     },
     {
@@ -252,7 +282,8 @@
         "aliases": {
             "aliyun": "DHL",
             "juhe": "dhl",
-            "kuaidi100": "dhl"
+            "kuaidi100": "dhl",
+            "kdniao": "FEDEX"
         }
     },
     {
@@ -260,7 +291,8 @@
         "aliases": {
             "aliyun": "DHL_EN",
             "juhe": "dhl",
-            "kuaidi100": "dhlen"
+            "kuaidi100": "dhlen",
+            "kdniao": "FEDEX_GJ"
         }
     },
     {
@@ -268,7 +300,8 @@
         "aliases": {
             "aliyun": "DPEX",
             "juhe": "dpex",
-            "kuaidi100": "dpex"
+            "kuaidi100": "dpex",
+            "kdniao": "DPEX"
         }
     },
     {
@@ -276,7 +309,8 @@
         "aliases": {
             "aliyun": "DEXP",
             "juhe": "ds",
-            "kuaidi100": "dsukuaidi"
+            "kuaidi100": "dsukuaidi",
+            "kdniao": "DSWL"
         }
     },
     {
@@ -284,7 +318,8 @@
         "aliases": {
             "aliyun": "FEDEX",
             "juhe": "fedexcn",
-            "kuaidi100": "fedexcn"
+            "kuaidi100": "fedexcn",
+            "kdniao": "FEDEX"
         }
     },
     {
@@ -292,7 +327,8 @@
         "aliases": {
             "aliyun": "FEDEXIN",
             "juhe": "fedexcn",
-            "kuaidi100": "fedex"
+            "kuaidi100": "fedex",
+            "kdniao": "FEDEX_GJ"
         }
     },
     {
@@ -300,7 +336,8 @@
         "aliases": {
             "aliyun": "",
             "juhe": "ocs",
-            "kuaidi100": "ocs"
+            "kuaidi100": "ocs",
+            "kdniao": ""
         }
     },
     {
@@ -308,7 +345,8 @@
         "aliases": {
             "aliyun": "TNT",
             "juhe": "tnt",
-            "kuaidi100": "tnt"
+            "kuaidi100": "tnt",
+            "kdniao": "TNT"
         }
     },
     {
@@ -316,7 +354,8 @@
         "aliases": {
             "aliyun": "COE",
             "juhe": "coe",
-            "kuaidi100": "coe"
+            "kuaidi100": "coe",
+            "kdniao": ""
         }
     },
     {
@@ -324,7 +363,8 @@
         "aliases": {
             "aliyun": "",
             "juhe": "cxwl",
-            "kuaidi100": "chuanxiwuliu"
+            "kuaidi100": "chuanxiwuliu",
+            "kdniao": "CXHY"
         }
     },
     {
@@ -332,7 +372,8 @@
         "aliases": {
             "aliyun": "CITY100",
             "juhe": "cs",
-            "kuaidi100": "city100"
+            "kuaidi100": "city100",
+            "kdniao": "CITY100"
         }
     },
     {
@@ -340,7 +381,8 @@
         "aliases": {
             "aliyun": "",
             "juhe": "cszx",
-            "kuaidi100": ""
+            "kuaidi100": "",
+            "kdniao": ""
         }
     },
     {
@@ -348,7 +390,8 @@
         "aliases": {
             "aliyun": "ANJELEX",
             "juhe": "aj",
-            "kuaidi100": "anjie88"
+            "kuaidi100": "anjie88",
+            "kdniao": "AJ"
         }
     },
     {
@@ -356,7 +399,8 @@
         "aliases": {
             "aliyun": "EES",
             "juhe": "bfdf",
-            "kuaidi100": "baifudongfang"
+            "kuaidi100": "baifudongfang",
+            "kdniao": "BFDF"
         }
     },
     {
@@ -364,7 +408,8 @@
         "aliases": {
             "aliyun": "FLYWAYEX",
             "juhe": "chengguang",
-            "kuaidi100": "chengguangkuaidi"
+            "kuaidi100": "chengguangkuaidi",
+            "kdniao": "CG"
         }
     },
     {
@@ -372,7 +417,8 @@
         "aliases": {
             "aliyun": "D4PX",
             "juhe": "dsf",
-            "kuaidi100": "disifang"
+            "kuaidi100": "disifang",
+            "kdniao": "D4PX"
         }
     },
     {
@@ -380,7 +426,8 @@
         "aliases": {
             "aliyun": "",
             "juhe": "ctwl",
-            "kuaidi100": ""
+            "kuaidi100": "",
+            "kdniao": ""
         }
     },
     {
@@ -388,7 +435,8 @@
         "aliases": {
             "aliyun": "",
             "juhe": "feibao",
-            "kuaidi100": "feibaokuaidi"
+            "kuaidi100": "feibaokuaidi",
+            "kdniao": ""
         }
     },
     {
@@ -396,7 +444,8 @@
         "aliases": {
             "aliyun": "ANE",
             "juhe": "ane66",
-            "kuaidi100": "annengwuliu"
+            "kuaidi100": "annengwuliu",
+            "kdniao": "ANE"
         }
     },
     {
@@ -404,7 +453,8 @@
         "aliases": {
             "aliyun": "YCGWL",
             "juhe": "ycgky",
-            "kuaidi100": "yuanchengwuliu"
+            "kuaidi100": "yuanchengwuliu",
+            "kdniao": "YCWL"
         }
     },
     {
@@ -412,7 +462,8 @@
         "aliases": {
             "aliyun": "CHINAPOST",
             "juhe": "youzheng",
-            "kuaidi100": "youzhengbk"
+            "kuaidi100": "youzhengbk",
+            "kdniao": "YZPY"
         }
     },
     {
@@ -420,7 +471,8 @@
         "aliases": {
             "aliyun": "BSKY",
             "juhe": "bsky",
-            "kuaidi100": "huitongkuaidi"
+            "kuaidi100": "huitongkuaidi",
+            "kdniao": "HTKY"
         }
     },
     {
@@ -428,7 +480,8 @@
         "aliases": {
             "aliyun": "SUNING",
             "juhe": "suning",
-            "kuaidi100": "suning"
+            "kuaidi100": "suning",
+            "kdniao": "SNWL"
         }
     },
     {
@@ -436,7 +489,8 @@
         "aliases": {
             "aliyun": "ANEEX",
             "juhe": "anneng",
-            "kuaidi100": "annengwuliu"
+            "kuaidi100": "annengwuliu",
+            "kdniao": "ANE"
         }
     },
     {
@@ -444,7 +498,26 @@
         "aliases": {
             "aliyun": "JIUYESCM",
             "juhe": "jiuye",
-            "kuaidi100": "jiuyescm"
+            "kuaidi100": "jiuyescm",
+            "kdniao": "JIUYE"
+        }
+    },
+    {
+        "name": "亚马逊",
+        "aliases": {
+            "aliyun": "",
+            "juhe": "",
+            "kuaidi100": "",
+            "kdniao": "AMAZON"
+        }
+    },
+    {
+        "name": "环球速运",
+        "aliases": {
+            "aliyun": "",
+            "juhe": "",
+            "kuaidi100": "",
+            "kdniao": "HQSY"
         }
     }
 ]
