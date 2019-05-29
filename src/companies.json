@@ -510,5 +510,14 @@
             "kuaidi100": "",
             "kdniao": "AMAZON"
         }
+    },
+    {
+        "name": "环球速运",
+        "aliases": {
+            "aliyun": "",
+            "juhe": "",
+            "kuaidi100": "",
+            "kdniao": "HQSY"
+        }
     }
 ]

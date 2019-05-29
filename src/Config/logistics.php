@@ -26,7 +26,7 @@ return [
     ],
 
     'kdniao'    => [
-        'app_code' => env('LOGISTICS_APP_CODE'), /** AppKey */
-        'customer' => env('LOGISTICS_CUSTOMER'), /** EBusinessID */
+        'app_code' => env('LOGISTICS_APP_CODE'), /** AppKey  */
+        'customer' => env('LOGISTICS_CUSTOMER'), /** EBusinessID  */
     ],
 ];

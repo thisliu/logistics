@@ -219,6 +219,7 @@ class Kdniao extends AbstractProvider
         if (\array_intersect(['AcceptStation', 'AcceptTime'], \array_keys(\current($list))) == ['AcceptStation', 'AcceptTime'] || empty($list)) {
             return $list;
         }
+
         \array_walk($list, function (&$list, $key, $names) {
             unset($list['time']);
             $list = array_combine($names, $list);
@@ -243,6 +244,7 @@ class Kdniao extends AbstractProvider
         } catch (\Exception $e) {
             throw new HttpException($e->getMessage(), $e->getCode(), $e);
         }
+
         return $result;
     }
 

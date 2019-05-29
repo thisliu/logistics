@@ -35,6 +35,7 @@ class KdniaoProviderTest extends TestCase
                 'app_code' => 'd7696d82-95d5-4922-ab95-4e0adee0fe8c',
                 'customer' => '1270293',
             ]];
+
         $response = '{
         "LogisticCode": "805741929402797742",
         "ShipperCode": "YTO",

@@ -12,7 +12,7 @@
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
  * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
  * 快递100 [Kuaidi100](https://www.kuaidi100.com/)
- * 快递鸟 [kdniao](https://www.kdniao.com/)
+ * 快递鸟  [kdniao](https://www.kdniao.com/)
 
 ## 安装	
 
