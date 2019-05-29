@@ -31,10 +31,10 @@ class KdniaoProviderTest extends TestCase
         $config = [
             'provider' => 'kdniao',
 
-            'kdniao'   => [
+            'kdniao' => [
                 'app_code' => 'd7696d82-95d5-4922-ab95-4e0adee0fe8c',
                 'customer' => '1270293',
-            ]];
+            ], ];
 
         $response = '{
         "LogisticCode": "805741929402797742",
@@ -84,16 +84,16 @@ class KdniaoProviderTest extends TestCase
 
         $response = json_decode($response, true);
 
-        $Kdniao = \Mockery::mock(Kdniao::class . '[post]', [$config])->shouldAllowMockingProtectedMethods();
+        $Kdniao = \Mockery::mock(Kdniao::class.'[post]', [$config])->shouldAllowMockingProtectedMethods();
 
         $param = ['ShipperCode' => 'YTO', 'LogisticCode' => '805741929402797742'];
 
         $params = [
             'EBusinessID' => $config['kdniao']['customer'],
             'RequestType' => 8001,
-            'DataType'    => 2,
+            'DataType' => 2,
             'RequestData' => \urlencode(\json_encode($param)),
-            'DataSign'    => urlencode(base64_encode(md5(\json_encode($param) . $config['kdniao']['app_code']))),
+            'DataSign' => urlencode(base64_encode(md5(\json_encode($param).$config['kdniao']['app_code']))),
         ];
 
         $Kdniao->shouldReceive('post')->with(
