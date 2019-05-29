@@ -10,18 +10,23 @@
  */
 
 return [
-    'provider' => 'aliyun',
+    'provider'  => 'aliyun',
 
-    'aliyun' => [
+    'aliyun'    => [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],
 
-    'juhe' => [
+    'juhe'      => [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],
 
     'kuaidi100' => [
         'app_code' => env('LOGISTICS_APP_CODE'),
         'customer' => env('LOGISTICS_CUSTOMER'),
+    ],
+
+    'kdniao'    => [
+        'app_code' => env('LOGISTICS_APP_CODE'), /** AppKey */
+        'customer' => env('LOGISTICS_CUSTOMER'), /** EBusinessID */
     ],
 ];
