@@ -16,7 +16,7 @@ return [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],
 
-    'aliyun' => [
+    'juhe' => [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],
 
