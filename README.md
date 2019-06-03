@@ -1,13 +1,13 @@
 <h1 align="center">Logistics</h1>
 
-<p align="center">快递物流查询-快递查询接口组件。(多平台兼容)</p>	
+<p align="center">快递物流查询-快递查询接口组件。</p>	
 
  [![Build Status](https://travis-ci.org/finecho/logistics.svg?branch=master)](https://travis-ci.org/finecho/logistics)	
 ![StyleCI build status](https://github.styleci.io/repos/185047335/shield) 	
 
 ## 介绍
  
- 目前支持三家平台
+ 目前已支持四家平台
  
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
  * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
