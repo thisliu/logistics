@@ -3,7 +3,11 @@
 <p align="center">快递物流查询-快递查询接口组件。</p>	
 
  [![Build Status](https://travis-ci.org/finecho/logistics.svg?branch=master)](https://travis-ci.org/finecho/logistics)	
-![StyleCI build status](https://github.styleci.io/repos/185047335/shield) 	
+![StyleCI build status](https://github.styleci.io/repos/185047335/shield)
+[![Latest Stable Version](https://poser.pugx.org/finecho/logistics/v/stable)](https://packagist.org/packages/finecho/logistics)
+[![Total Downloads](https://poser.pugx.org/finecho/logistics/downloads)](https://packagist.org/packages/finecho/logistics)
+[![Latest Unstable Version](https://poser.pugx.org/finecho/logistics/v/unstable)](https://packagist.org/packages/finecho/logistics)
+[![License](https://poser.pugx.org/finecho/logistics/license)](https://packagist.org/packages/finecho/logistics)
 
 ## 介绍
  
@@ -154,6 +158,7 @@ $order->getOriginal(); // 获取接口原始返回信息
 * aliyun ：$company 可选
 * juhe : $company 必填
 * kuaidi100 : $company 可选（建议必填，不填查询结果不一定准确）
+* kdniao : $company 可选（建议必填，不填查询结果不一定准确）
 
 ### 在 Laravel 中使用	
 
