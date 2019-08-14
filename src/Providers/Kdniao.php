@@ -159,8 +159,8 @@ class Kdniao extends AbstractProvider
     }
 
     /**
-     * @param   $requestData
-     * @param   $requestType
+     * @param $requestData
+     * @param $requestType
      *
      * @return array
      */
