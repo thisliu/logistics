@@ -119,7 +119,7 @@ class Kdniao extends AbstractProvider
         if (empty($company)) {
             $query['LogisticCode'] = $no;
 
-            $params = $this->getRequestParams($query，self::LOGISTICS_COM_CODE_TYPE);
+            $params = $this->getRequestParams($query, self::LOGISTICS_COM_CODE_TYPE);
 
             $response = $this->sendRequestGet(self::LOGISTICS_COM_CODE_URL, $params, []);
 
