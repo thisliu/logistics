@@ -11,7 +11,6 @@
 
 namespace Finecho\Logistics\Providers;
 
-use function Couchbase\defaultDecoder;
 use Finecho\Logistics\Exceptions\HttpException;
 use Finecho\Logistics\Exceptions\InquiryErrorException;
 use Finecho\Logistics\Interfaces\AliyunConfigurationConstant;
@@ -146,27 +145,35 @@ class Aliyun extends AbstractProvider implements AliyunConfigurationConstant
         switch ($status) {
             case self::STATUS_COURIER_RECEIPT:
                 $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+
                 break;
             case self::STATUS_ON_THE_WAY:
                 $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+
                 break;
             case self::STATUS_SENDING_A_PIECE:
                 $status = self::LOGISTICS_STATUS_DELIVERING;
+
                 break;
             case self::STATUS_SIGNED:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_DELIVERY_FAILED:
                 $status = self::LOGISTICS_STATUS_DELIVERY_FAILED;
+
                 break;
             case self::STATUS_TROUBLESOME:
                 $status = self::LOGISTICS_STATUS_TROUBLESOME;
+
                 break;
             case self::STATUS_RETURN_RECEIPT:
                 $status = self::LOGISTICS_STATUS_RETURN_RECEIPT;
+
                 break;
             default:
                 $status = self::LOGISTICS_STATUS_ERROR;
+
                 break;
         }
 

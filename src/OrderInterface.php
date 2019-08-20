@@ -66,6 +66,7 @@ interface OrderInterface
      * @return array
      */
     public function getAbstractStatus();
+
     /**
      * Get the courier name.
      *
