@@ -11,9 +11,11 @@
 
 namespace Finecho\Logistics\Providers;
 
+use function Couchbase\defaultDecoder;
 use Finecho\Logistics\Exceptions\HttpException;
 use Finecho\Logistics\Exceptions\InquiryErrorException;
 use Finecho\Logistics\Exceptions\InvalidArgumentException;
+use Finecho\Logistics\Interfaces\JuheConfigurationConstant;
 use Finecho\Logistics\Order;
 use Finecho\Logistics\Traits\HasHttpRequest;
 
@@ -22,60 +24,9 @@ use Finecho\Logistics\Traits\HasHttpRequest;
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-class Juhe extends AbstractProvider
+class Juhe extends AbstractProvider implements JuheConfigurationConstant
 {
     use HasHttpRequest;
-
-    const PROVIDER_NAME = 'Juhe';
-
-    const LOGISTICS_INFO_URL = 'http://v.juhe.cn/exp/index';
-
-    const SUCCESS_STATUS = 200;
-
-    const STATUS_ERROR = -1;
-
-    const STATUS_NO_CONTENT = 0;
-
-    const STATUS_PENDING = 'PENDING';
-
-    const STATUS_NO_RECORD = 'NO_RECORD';
-
-    const STATUS_IN_TRANSIT = 'IN_TRANSIT';
-
-    const STATUS_DELIVERING = 'DELIVERING';
-
-    const STATUS_SIGNED = 'SIGNED';
-
-    const STATUS_REJECTED = 'REJECTED';
-
-    const STATUS_PROBLEM = 'PROBLEM';
-
-    const STATUS_INVALID = 'INVALID';
-
-    const STATUS_TIMEOUT = 'TIMEOUT';
-
-    const STATUS_FAILED = 'FAILED';
-
-    const STATUS_SEND_BACK = 'SEND_BACK';
-
-    const STATUS_TAKING = 'TAKING';
-
-    const STATUS_LABELS = [
-        self::STATUS_ERROR => '异常',
-        self::STATUS_NO_CONTENT => '无信息',
-        self::STATUS_PENDING => '待查询',
-        self::STATUS_NO_RECORD => '无记录',
-        self::STATUS_IN_TRANSIT => '运输中',
-        self::STATUS_DELIVERING => '派送中',
-        self::STATUS_SIGNED => '已签收',
-        self::STATUS_REJECTED => '拒签',
-        self::STATUS_PROBLEM => '疑难件',
-        self::STATUS_INVALID => '无效件',
-        self::STATUS_TIMEOUT => '超时件',
-        self::STATUS_FAILED => '派送失败',
-        self::STATUS_SEND_BACK => '退回',
-        self::STATUS_TAKING => '揽件',
-    ];
 
     /**
      * @param      $no
@@ -87,7 +38,7 @@ class Juhe extends AbstractProvider
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
      */
-    public function order($no, $company = null)
+    public function query($no, $company = null)
     {
         $params = \array_filter([
             'key' => $this->config[\strtolower(self::PROVIDER_NAME)]['app_code'],
@@ -151,17 +102,18 @@ class Juhe extends AbstractProvider
      */
     protected function mapLogisticsOrderToObject($logisticsOrder)
     {
-        $status = \intval($logisticsOrder['result']['status_detail']);
-
         $list = $this->resetList($logisticsOrder['result']['list']);
+
+        list($status, $displayStatus) = $this->claimLogisticsStatus(\intval($logisticsOrder['result']['status_detail']));
 
         return new Order([
             'code' => self::GLOBAL_SUCCESS_CODE,
             'msg' => self::GLOBAL_SUCCESS_MSG,
-
             'company' => $this->company ?: $logisticsOrder['result']['company'],
             'no' => $logisticsOrder['result']['no'],
-            'status' => \in_array($status, \array_keys(self::STATUS_LABELS)) ? self::STATUS_LABELS[$status] : self::STATUS_LABELS[self::STATUS_ERROR],
+            'status' => $status,
+            'display_status' => $displayStatus,
+            'abstract_status' => $this->abstractLogisticsStatus($status),
             'list' => $list,
         ]);
     }
@@ -182,5 +134,57 @@ class Juhe extends AbstractProvider
         }, ['datetime', 'remark']);
 
         return $list;
+    }
+
+    /**
+     * @param $status
+     *
+     * @return array
+     */
+    public function claimLogisticsStatus($status)
+    {
+        switch ($status) {
+            case self::STATUS_PENDING:
+                $status = self::LOGISTICS_STATUS_NO_RECORD;
+                break;
+            case self::STATUS_NO_RECORD:
+                $status = self::LOGISTICS_STATUS_NO_RECORD;
+                break;
+            case self::STATUS_IN_TRANSIT:
+                $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+                break;
+            case self::STATUS_DELIVERING:
+                $status = self::LOGISTICS_STATUS_DELIVERING;
+                break;
+            case self::STATUS_SIGNED:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_REJECTED:
+                $status = self::LOGISTICS_STATUS_REJECTED;
+                break;
+            case self::STATUS_PROBLEM:
+                $status = self::LOGISTICS_STATUS_TROUBLESOME;
+                break;
+            case self::STATUS_INVALID:
+                $status = self::LOGISTICS_STATUS_TROUBLESOME;
+                break;
+            case self::STATUS_TIMEOUT:
+                $status = self::LOGISTICS_STATUS_TIMEOUT;
+                break;
+            case self::STATUS_FAILED:
+                $status = self::LOGISTICS_STATUS_DELIVERY_FAILED;
+                break;
+            case self::STATUS_SEND_BACK:
+                $status = self::LOGISTICS_STATUS_SEND_BACK;
+                break;
+            case self::STATUS_TAKING:
+                $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+                break;
+            default:
+                $status = self::LOGISTICS_STATUS_ERROR;
+                break;
+        }
+
+        return [$status, self::LOGISTICS_STATUS_LABELS[$status]];
     }
 }

@@ -1,7 +1,7 @@
-<h1 align="center">Logistics</h1>
+<h1>❤️ Logistics</h1>
 
-<p align="center">快递物流查询-快递查询接口组件。</p>	
-
+<p>快递物流查询-快递查询接口组件。</p>
+	
  [![Build Status](https://travis-ci.org/finecho/logistics.svg?branch=master)](https://travis-ci.org/finecho/logistics)	
 ![StyleCI build status](https://github.styleci.io/repos/185047335/shield)
 [![Latest Stable Version](https://poser.pugx.org/finecho/logistics/v/stable)](https://packagist.org/packages/finecho/logistics)
@@ -9,13 +9,24 @@
 [![Latest Unstable Version](https://poser.pugx.org/finecho/logistics/v/unstable)](https://packagist.org/packages/finecho/logistics)
 [![License](https://poser.pugx.org/finecho/logistics/license)](https://packagist.org/packages/finecho/logistics)
 
+## ⚠️ 更新提示
+ 1. 物流查询方法修改为：$order = $logistics->query('805741929402797742', '圆通');
+ 2. 快递100 类名由 `Kuaidi100` 修改为 `Kd100`
+ 3. 返回物流状态已统一,具体请查看：src/Interfaces/LogisticsStatus.php
+ 4. 抽象物流状态为五种结果：
+    * has_progresses:是否已经有动态
+    * progress_cutoff:动态是否已经截止
+    * is_signed:是否签收
+    * is_troublesome:是否问题件
+    * is_return:是否退回件
+
 ## 介绍
  
  目前已支持四家平台
  
  * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
  * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
- * 快递100 [Kuaidi100](https://www.kuaidi100.com/)
+ * 快递100 [Kd100](https://www.kuaidi100.com/)
  * 快递鸟  [kdniao](https://www.kdniao.com/)
 
 ## 安装	
@@ -42,7 +53,12 @@ $config = [
          'app_code' => 'xxxxx',
     ],
     
-    'kuaidi100' => [
+    'kdniao' => [
+             'app_code' => 'xxxxx',
+             'customer' => 'xxxxx',
+    ],
+        
+    'kd100' => [
          'app_code' => 'xxxxx',
          'customer' => 'xxxxx',
     ],
@@ -71,7 +87,7 @@ $companies = $logistics->companies();
 ###  获取物流信息	
 
 ```php	
-$order = $logistics->order('805741929402797742', '圆通');
+$order = $logistics->query('805741929402797742', '圆通');
 ```
 
 示例：	
@@ -82,7 +98,15 @@ $order = $logistics->order('805741929402797742', '圆通');
     "msg": "OK",
     "company": "圆通",
     "no": "805741929402797742",
-    "status": "无信息",
+    "status": 4,
+    "display_status": "已签收",
+    "abstract_status": {
+        "has_progresses" : true,
+        "progress_cutoff" : true,
+        "is_signed" : true,
+        "is_troublesome" : false,
+        "is_return" : false
+    },
     "list": [
         {
             "datetime": "2019-05-07 18:02:27",
@@ -138,7 +162,12 @@ $order->getCode(); // 状态码
 $order->getMsg(); // 状态信息
 $order->getCompany(); // 物流公司简称
 $order->getNo(); // 物流单号
-$order->getStatus(); // 当前物流单详情
+$order->getStatus(); // 当前物流单状态 
+
+`注：#物流状态可能不是一定准确的#`
+
+$order->getDisplayStatus(); // 当前物流单状态展示名
+$order->getAbstractStatus(); // 当前抽象物流单状态
 $order->getCourier(); // 快递员姓名
 $order->getCourierPhone(); // 快递员手机号
 $order->getList(); // 物流单状态详情
@@ -155,10 +184,10 @@ $order->getOriginal(); // 获取接口原始返回信息
 > - `$no` - 物流单号	
 > - `$company` - 快递公司名（通过 $companies = $logistics->companies(); 获取)
 
-* aliyun ：$company 可选
-* juhe : $company 必填
-* kuaidi100 : $company 可选（建议必填，不填查询结果不一定准确）
-* kdniao : $company 可选（建议必填，不填查询结果不一定准确）
+* `aliyun` ：`$company` 可选
+* `juhe` : `$company` 必填
+* `kd100` : `$company` 可选（建议必填，不填查询结果不一定准确）
+* `kdniao` : `$company` 可选（建议必填，不填查询结果不一定准确）
 
 ### 在 Laravel 中使用	
 
@@ -185,7 +214,7 @@ LOGISTICS_CUSTOMER=xxxxxxxxxxxxxxxxx	// 快递100 customer
     .	
     public function show(Logistics $logistics, $no, $company) 	
     {	
-        $order = $logistics->order($no, $company);
+        $order = $logistics->query($no, $company);
         
         return $order;	// $order->getList(); .....
     }	
@@ -202,7 +231,7 @@ LOGISTICS_CUSTOMER=xxxxxxxxxxxxxxxxx	// 快递100 customer
     .	
     public function show($no, $company) 	
     {	
-        $response = app('logistics')->order($no, $company);	
+        $response = app('logistics')->query($no, $company);	
     }	
     .	
     .	

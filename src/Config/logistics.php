@@ -20,7 +20,7 @@ return [
         'app_code' => env('LOGISTICS_APP_CODE'),
     ],
 
-    'kuaidi100' => [
+    'kd100' => [
         'app_code' => env('LOGISTICS_APP_CODE'),
         'customer' => env('LOGISTICS_CUSTOMER'),
     ],

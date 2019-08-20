@@ -13,66 +13,18 @@ namespace Finecho\Logistics\Providers;
 
 use Finecho\Logistics\Exceptions\HttpException;
 use Finecho\Logistics\Exceptions\InquiryErrorException;
+use Finecho\Logistics\Interfaces\Kd100ConfigurationConstant;
 use Finecho\Logistics\Order;
 use Finecho\Logistics\Traits\HasHttpRequest;
 
 /**
- * Class Kuaidi100.
+ * Class Kd100.
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-class Kuaidi100 extends AbstractProvider
+class Kd100 extends AbstractProvider implements Kd100ConfigurationConstant
 {
     use HasHttpRequest;
-
-    const PROVIDER_NAME = 'Kuaidi100';
-
-    const LOGISTICS_COM_CODE_URL = 'http://www.kuaidi100.com/autonumber/auto';
-
-    const LOGISTICS_INFO_URL = 'http://poll.kuaidi100.com/poll/query.do';
-
-    const SUCCESS_STATUS = 200;
-
-    const STATUS_ERROR = -1;
-
-    const STATUS_ON_THE_WAY = 0;
-
-    const STATUS_PACKAGE = 1;
-
-    const STATUS_DIFFICULT = 2;
-
-    const STATUS_SIGNING = 3;
-
-    const STATUS_REFUND = 4;
-
-    const STATUS_PIECE = 5;
-
-    const STATUS_RETURN = 6;
-
-    const RETURN_TO_BE_CLEARED = 10;
-
-    const STATUS_CLEARANCE = 11;
-
-    const STATUS_CLEARED = 12;
-
-    const STATUS_CUSTOMS_CLEARANCE_ABNORMALITY = 13;
-
-    const STATUS_RECIPIENT_REFUSAL = 14;
-
-    const STATUS_LABELS = [
-        self::STATUS_ERROR => '异常',
-        self::STATUS_PACKAGE => '揽件',
-        self::STATUS_DIFFICULT => '疑难',
-        self::STATUS_SIGNING => '签收',
-        self::STATUS_REFUND => '退签',
-        self::STATUS_PIECE => '派件',
-        self::STATUS_RETURN => '退回',
-        self::RETURN_TO_BE_CLEARED => '待清关',
-        self::STATUS_CLEARANCE => '清关中',
-        self::STATUS_CLEARED => '已清关',
-        self::STATUS_CUSTOMS_CLEARANCE_ABNORMALITY => '清关异常',
-        self::STATUS_RECIPIENT_REFUSAL => '收件人拒签',
-    ];
 
     /**
      * @param      $no
@@ -84,7 +36,7 @@ class Kuaidi100 extends AbstractProvider
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
      */
-    public function order($no, $company = null)
+    public function query($no, $company = null)
     {
         if (empty($company)) {
             $query = [
@@ -187,17 +139,18 @@ class Kuaidi100 extends AbstractProvider
      */
     protected function mapLogisticsOrderToObject($logisticsOrder)
     {
-        $status = \intval($logisticsOrder['state']);
-
         $list = $this->resetList($logisticsOrder['data']);
+
+        list($status, $displayStatus) = $this->claimLogisticsStatus(\intval($logisticsOrder['state']));
 
         return new Order([
             'code' => self::GLOBAL_SUCCESS_CODE,
             'msg' => self::GLOBAL_SUCCESS_MSG,
-
             'company' => $this->company ?: $logisticsOrder['com'],
             'no' => $logisticsOrder['nu'],
-            'status' => \in_array($status, \array_keys(self::STATUS_LABELS)) ? self::STATUS_LABELS[$status] : self::STATUS_LABELS[self::STATUS_ERROR],
+            'status' => $status,
+            'display_status' => $displayStatus,
+            'abstract_status' => $this->abstractLogisticsStatus($status),
             'list' => $list,
         ]);
     }
@@ -232,5 +185,54 @@ class Kuaidi100 extends AbstractProvider
     protected function generateSign($param, $key, $customer)
     {
         return \strtoupper(\md5(\json_encode($param).$key.$customer));
+    }
+
+    /**
+     * @param $status
+     *
+     * @return array
+     */
+    public function claimLogisticsStatus($status)
+    {
+        switch ($status) {
+            case self::STATUS_PACKAGE:
+                $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+                break;
+            case self::STATUS_DIFFICULT:
+                $status = self::LOGISTICS_STATUS_TROUBLESOME;
+                break;
+            case self::STATUS_SIGNING:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_REFUND:
+                $status = self::LOGISTICS_STATUS_RETURN_RECEIPT;
+                break;
+            case self::STATUS_PIECE:
+                $status = self::LOGISTICS_STATUS_DELIVERING;
+                break;
+            case self::STATUS_RETURN:
+                $status = self::LOGISTICS_STATUS_SEND_BACK;
+                break;
+            case self::RETURN_TO_BE_CLEARED:
+                $status = self::LOGISTICS_STATUS_TO_BE_CLEARED;
+                break;
+            case self::STATUS_CLEARANCE:
+                $status = self::LOGISTICS_STATUS_CLEARANCE;
+                break;
+            case self::STATUS_CLEARED:
+                $status = self::LOGISTICS_STATUS_CLEARED;
+                break;
+            case self::STATUS_CUSTOMS_CLEARANCE_ABNORMALITY:
+                $status = self::LOGISTICS_STATUS_CUSTOMS_CLEARANCE_ABNORMALITY;
+                break;
+            case self::STATUS_RECIPIENT_REFUSAL:
+                $status = self::LOGISTICS_STATUS_REJECTED;
+                break;
+            default:
+                $status = self::LOGISTICS_STATUS_ERROR;
+                break;
+        }
+
+        return [$status, self::LOGISTICS_STATUS_LABELS[$status]];
     }
 }

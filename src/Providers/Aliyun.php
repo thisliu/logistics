@@ -11,8 +11,10 @@
 
 namespace Finecho\Logistics\Providers;
 
+use function Couchbase\defaultDecoder;
 use Finecho\Logistics\Exceptions\HttpException;
 use Finecho\Logistics\Exceptions\InquiryErrorException;
+use Finecho\Logistics\Interfaces\AliyunConfigurationConstant;
 use Finecho\Logistics\Order;
 use Finecho\Logistics\Traits\HasHttpRequest;
 
@@ -21,44 +23,9 @@ use Finecho\Logistics\Traits\HasHttpRequest;
  *
  * @author finecho <liuhao25@foxmail.com>
  */
-class Aliyun extends AbstractProvider
+class Aliyun extends AbstractProvider implements AliyunConfigurationConstant
 {
     use HasHttpRequest;
-
-    const PROVIDER_NAME = 'Aliyun';
-
-    const LOGISTICS_INFO_URL = 'http://wuliu.market.alicloudapi.com/kdi';
-
-    const LOGISTICS_COMPANY_URL = 'http://wuliu.market.alicloudapi.com/getExpressList';
-
-    const SUCCESS_STATUS = 0;
-
-    const STATUS_ERROR = -1;
-
-    const STATUS_COURIER_RECEIPT = 0;
-
-    const STATUS_ON_THE_WAY = 1;
-
-    const STATUS_SENDING_A_PIECE = 2;
-
-    const STATUS_SIGNED = 3;
-
-    const STATUS_DELIVERY_FAILED = 4;
-
-    const STATUS_TROUBLESOME = 5;
-
-    const STATUS_RETURN_RECEIPT = 6;
-
-    const STATUS_LABELS = [
-        self::STATUS_ERROR => '异常',
-        self::STATUS_COURIER_RECEIPT => '快递收件(揽件)',
-        self::STATUS_ON_THE_WAY => '在途中',
-        self::STATUS_SENDING_A_PIECE => '正在派件',
-        self::STATUS_SIGNED => '已签收',
-        self::STATUS_DELIVERY_FAILED => '派送失败',
-        self::STATUS_TROUBLESOME => '疑难件',
-        self::STATUS_RETURN_RECEIPT => '退件签收',
-    ];
 
     /**
      * @param      $no
@@ -70,7 +37,7 @@ class Aliyun extends AbstractProvider
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
      */
-    public function order($no, $company = null)
+    public function query($no, $company = null)
     {
         $params = \array_filter([
             'no' => $no,
@@ -133,19 +100,20 @@ class Aliyun extends AbstractProvider
      */
     protected function mapLogisticsOrderToObject($logisticsOrder)
     {
-        $status = \intval($logisticsOrder['result']['deliverystatus']);
-
         $list = $this->resetList($logisticsOrder['result']['list']);
+
+        list($status, $displayStatus) = $this->claimLogisticsStatus(\intval($logisticsOrder['result']['deliverystatus']));
 
         return new Order([
             'code' => self::GLOBAL_SUCCESS_CODE,
             'msg' => self::GLOBAL_SUCCESS_MSG,
-
             'company' => $this->company ?: $logisticsOrder['result']['expName'],
             'no' => $logisticsOrder['result']['number'],
-            'status' => \in_array($status, \array_keys(self::STATUS_LABELS)) ? self::STATUS_LABELS[$status] : self::STATUS_LABELS[self::STATUS_ERROR],
+            'status' => $status,
+            'display_status' => $displayStatus,
+            'abstract_status' => $this->abstractLogisticsStatus($status),
             'courier' => $logisticsOrder['result']['courier'],
-            'courierPhone' => $logisticsOrder['result']['courierPhone'],
+            'courier_phone' => $logisticsOrder['result']['courierPhone'],
             'list' => $list,
         ]);
     }
@@ -166,5 +134,42 @@ class Aliyun extends AbstractProvider
         }, ['datetime', 'remark']);
 
         return $list;
+    }
+
+    /**
+     * @param $status
+     *
+     * @return array
+     */
+    public function claimLogisticsStatus($status)
+    {
+        switch ($status) {
+            case self::STATUS_COURIER_RECEIPT:
+                $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+                break;
+            case self::STATUS_ON_THE_WAY:
+                $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+                break;
+            case self::STATUS_SENDING_A_PIECE:
+                $status = self::LOGISTICS_STATUS_DELIVERING;
+                break;
+            case self::STATUS_SIGNED:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_DELIVERY_FAILED:
+                $status = self::LOGISTICS_STATUS_DELIVERY_FAILED;
+                break;
+            case self::STATUS_TROUBLESOME:
+                $status = self::LOGISTICS_STATUS_TROUBLESOME;
+                break;
+            case self::STATUS_RETURN_RECEIPT:
+                $status = self::LOGISTICS_STATUS_RETURN_RECEIPT;
+                break;
+            default:
+                $status = self::LOGISTICS_STATUS_ERROR;
+                break;
+        }
+
+        return [$status, self::LOGISTICS_STATUS_LABELS[$status]];
     }
 }
