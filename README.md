@@ -43,7 +43,7 @@ require __DIR__ .'/vendor/autoload.php';
 use Finecho\Logistics\Logistics;
 
 $config = [
-    'provider' => 'aliyun', // aliyun/juhe/kuaidi100
+    'provider' => 'aliyun', // aliyun/juhe/kd100
     
     'aliyun' => [
         'app_code' => 'xxxxxxxx',
