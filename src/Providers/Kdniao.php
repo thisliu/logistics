@@ -12,6 +12,7 @@ namespace Finecho\Logistics\Providers;
 
 use Finecho\Logistics\Exceptions\HttpException;
 use Finecho\Logistics\Exceptions\InquiryErrorException;
+use Finecho\Logistics\Interfaces\KdniaoConfigurationConstant;
 use Finecho\Logistics\Order;
 use Finecho\Logistics\Traits\HasHttpRequest;
 
@@ -20,89 +21,9 @@ use Finecho\Logistics\Traits\HasHttpRequest;
  *
  * @author Aliliin <PhperAli@Gmail.com>
  */
-class Kdniao extends AbstractProvider
+class Kdniao extends AbstractProvider implements KdniaoConfigurationConstant
 {
     use HasHttpRequest;
-
-    const PROVIDER_NAME = 'Kdniao';
-
-    const KDNIAO_NOT_PAY = 1002;
-
-    const KDNIAO_PAY = 8001;
-
-    const KDNIAO_DATA_TYPE = 2;
-
-    const LOGISTICS_INFO_URL = 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx';
-
-    const LOGISTICS_COM_CODE_URL = 'http://api.kdniao.com/Ebusiness/EbusinessOrderHandle.aspx';
-
-    const SUCCESS_STATUS = 200;
-
-    const STATUS_ERROR = -1;
-
-    const STATUS_NO_TRACK = 0;
-
-    const STATUS_PACKAGE = 1;
-
-    const STATUS_ON_THE_WAY = 2;
-
-    const STATUS_SIGNING = 3;
-
-    const STATUS_QUESTION_PACKAGE = 4;
-
-    const STATUS_IN_THE_CITY = 201;
-
-    const STATUS_IN_THE_PACKAGE = 202;
-
-    const STATUS_DIEPOSIT_ARK = 211;
-
-    const STATUS_NORMAL_SIGNING = 301;
-
-    const STATUS_ABNORMAL_SIGNING = 302;
-
-    const STATUS_ISSUING_SIGNING = 304;
-
-    const STATUS_ARK_SIGNING = 311;
-
-    const STATUS_NO_DELIVERY_INFO = 401;
-
-    const STATUS_TIMEOUT_NOT_SIGNING = 402;
-
-    const STATUS_TIMEOUT_NOT_UPDATE = 403;
-
-    const STATUS_RETURN_PACKAGE = 404;
-
-    const STATUS_PACKAGE_ERROR = 405;
-
-    const STATUS_RETURN_SINGNING = 406;
-
-    const STATUS_RETURN_NOT_SINGNING = 407;
-
-    const STATUS_ARK_NOT_SINGNING = 412;
-
-    const STATUS_LABELS = [
-        self::STATUS_ERROR => '异常',
-        self::STATUS_NO_TRACK => '无轨迹',
-        self::STATUS_PACKAGE => '已揽收',
-        self::STATUS_SIGNING => '已签收',
-        self::STATUS_ON_THE_WAY => '在途中',
-        self::STATUS_QUESTION_PACKAGE => '问题件',
-        self::STATUS_IN_THE_CITY => '到达派件城市',
-        self::STATUS_IN_THE_PACKAGE => '派件中',
-        self::STATUS_DIEPOSIT_ARK => '已放入快递柜或驿站',
-        self::STATUS_NORMAL_SIGNING => '正常签收',
-        self::STATUS_ABNORMAL_SIGNING => '派件异常后最终签收',
-        self::STATUS_ISSUING_SIGNING => '代收签收',
-        self::STATUS_ARK_SIGNING => '快递柜或驿站签收',
-        self::STATUS_NO_DELIVERY_INFO => '发货无信息',
-        self::STATUS_TIMEOUT_NOT_SIGNING => '超时未签收',
-        self::STATUS_TIMEOUT_NOT_UPDATE => '超时未更新',
-        self::STATUS_RETURN_PACKAGE => '拒收(退件)',
-        self::STATUS_PACKAGE_ERROR => '派件异常',
-        self::STATUS_RETURN_SINGNING => '退货签收',
-        self::STATUS_RETURN_NOT_SINGNING => '退货未签收',
-        self::STATUS_ARK_NOT_SINGNING => '快递柜或驿站超时未取',
-    ];
 
     /**
      * @param      $no
@@ -114,12 +35,12 @@ class Kdniao extends AbstractProvider
      * @throws \Finecho\Logistics\Exceptions\InquiryErrorException
      * @throws \Finecho\Logistics\Exceptions\InvalidArgumentException
      */
-    public function order($no, $company = null)
+    public function query($no, $company = null)
     {
         if (empty($company)) {
             $query['LogisticCode'] = $no;
 
-            $params = $this->getRequestParams($query, self::LOGISTICS_COM_CODE_TYPE);
+            $params = $this->getRequestParams($query);
 
             $response = $this->sendRequestGet(self::LOGISTICS_COM_CODE_URL, $params, []);
 
@@ -212,16 +133,18 @@ class Kdniao extends AbstractProvider
      */
     protected function mapLogisticsOrderToObject($logisticsOrder)
     {
-        $status = empty($logisticsOrder['StateEx']) ? \intval($logisticsOrder['State']) : \intval($logisticsOrder['StateEx']);
-
         $list = $this->resetList($logisticsOrder['Traces']);
+
+        list($status, $displayStatus) = $this->claimLogisticsStatus(empty($logisticsOrder['StateEx']) ? \intval($logisticsOrder['State']) : \intval($logisticsOrder['StateEx']));
 
         return new Order([
             'code' => self::GLOBAL_SUCCESS_CODE,
             'msg' => self::GLOBAL_SUCCESS_MSG,
             'company' => $this->company ?: $logisticsOrder['ShipperCode'],
             'no' => $logisticsOrder['LogisticCode'],
-            'status' => \in_array($status, \array_keys(self::STATUS_LABELS)) ? self::STATUS_LABELS[$status] : self::STATUS_LABELS[self::STATUS_ERROR],
+            'status' => $status,
+            'display_status' => $displayStatus,
+            'abstract_status' => $this->abstractLogisticsStatus($status),
             'list' => $list,
             'original' => $logisticsOrder,
         ]);
@@ -277,12 +200,87 @@ class Kdniao extends AbstractProvider
     /**
      * @param $param
      * @param $key
-     * @param $customer
      *
      * @return string
      */
     protected function generateSign($param, $key)
     {
         return urlencode(base64_encode(md5(\json_encode($param).$key)));
+    }
+
+    /**
+     * @param $status
+     *
+     * @return array
+     */
+    public function claimLogisticsStatus($status)
+    {
+        switch ($status) {
+            case self::STATUS_NO_TRACK:
+                $status = self::LOGISTICS_STATUS_NO_RECORD;
+                break;
+            case self::STATUS_PACKAGE:
+                $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+                break;
+            case self::STATUS_ON_THE_WAY:
+                $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+                break;
+            case self::STATUS_SIGNING:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_QUESTION_PACKAGE:
+                $status = self::LOGISTICS_STATUS_TROUBLESOME;
+                break;
+            case self::STATUS_IN_THE_CITY:
+                $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+                break;
+            case self::STATUS_IN_THE_PACKAGE:
+                $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+                break;
+            case self::STATUS_DIEPOSIT_ARK:
+                $status = self::LOGISTICS_STATUS_AWAIT_SIGN;
+                break;
+            case self::STATUS_NORMAL_SIGNING:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_ABNORMAL_SIGNING:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_ISSUING_SIGNING:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_ARK_SIGNING:
+                $status = self::LOGISTICS_STATUS_SIGNED;
+                break;
+            case self::STATUS_NO_DELIVERY_INFO:
+                $status = self::LOGISTICS_STATUS_TROUBLESOME;
+                break;
+            case self::STATUS_TIMEOUT_NOT_SIGNING:
+                $status = self::LOGISTICS_STATUS_TIMEOUT;
+                break;
+            case self::STATUS_TIMEOUT_NOT_UPDATE:
+                $status = self::LOGISTICS_STATUS_TIMEOUT;
+                break;
+            case self::STATUS_RETURN_PACKAGE:
+                $status = self::LOGISTICS_STATUS_REJECTED;
+                break;
+            case self::STATUS_PACKAGE_ERROR:
+                $status = self::LOGISTICS_STATUS_DELIVERY_FAILED;
+                break;
+            case self::STATUS_RETURN_SINGNING:
+                $status = self::LOGISTICS_STATUS_RETURN_RECEIPT;
+                break;
+            case self::STATUS_RETURN_NOT_SINGNING:
+                $status = self::LOGISTICS_STATUS_AWAIT_SIGN;
+                break;
+            case self::STATUS_ARK_NOT_SINGNING:
+                $status = self::LOGISTICS_STATUS_AWAIT_SIGN;
+                break;
+            default:
+                $status = self::LOGISTICS_STATUS_ERROR;
+                break;
+        }
+
+        return [$status, self::LOGISTICS_STATUS_LABELS[$status]];
     }
 }

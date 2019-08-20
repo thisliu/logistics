@@ -75,6 +75,22 @@ class Order implements \ArrayAccess, OrderInterface, \JsonSerializable, \Seriali
     /**
      * @return string
      */
+    public function getDisplayStatus()
+    {
+        return $this->getAttribute('display_status');
+    }
+
+    /**
+     * @return string
+     */
+    public function getAbstractStatus()
+    {
+        return $this->getAttribute('abstract_status');
+    }
+
+    /**
+     * @return string
+     */
     public function getCourier()
     {
         return $this->getAttribute('courier');
@@ -85,7 +101,7 @@ class Order implements \ArrayAccess, OrderInterface, \JsonSerializable, \Seriali
      */
     public function getCourierPhone()
     {
-        return $this->getAttribute('courierPhone');
+        return $this->getAttribute('courier_phone');
     }
 
     /**

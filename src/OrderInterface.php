@@ -54,6 +54,19 @@ interface OrderInterface
     public function getStatus();
 
     /**
+     * Get logistics display status.
+     *
+     * @return string
+     */
+    public function getDisplayStatus();
+
+    /**
+     * Get logistics abstract status.
+     *
+     * @return array
+     */
+    public function getAbstractStatus();
+    /**
      * Get the courier name.
      *
      * @return string
