@@ -98,7 +98,7 @@ abstract class AbstractProvider implements ProviderInterface, LogisticsStatus
     }
 
     /**
-     * @param      $status
+     * @param $status
      *
      * @return array
      */
@@ -111,60 +111,75 @@ abstract class AbstractProvider implements ProviderInterface, LogisticsStatus
                 break;
             case self::LOGISTICS_STATUS_COURIER_RECEIPT:
                 $hasProgresses = true;
+
                 break;
             case self::LOGISTICS_STATUS_IN_TRANSIT:
                 $hasProgresses = true;
+
                 break;
             case self::LOGISTICS_STATUS_DELIVERING:
                 $hasProgresses = true;
+
                 break;
             case self::LOGISTICS_STATUS_SIGNED:
                 $hasProgresses = true;
                 $progressCutoff = true;
                 $isSigned = true;
+
                 break;
             case self::LOGISTICS_STATUS_DELIVERY_FAILED:
                 $hasProgresses = true;
                 $progressCutoff = true;
                 $isTroublesome = false;
+
                 break;
             case self::LOGISTICS_STATUS_TROUBLESOME:
                 $isTroublesome = false;
+
                 break;
             case self::LOGISTICS_STATUS_RETURN_RECEIPT:
                 $hasProgresses = true;
                 $progressCutoff = true;
                 $isTroublesome = true;
                 $isReturn = true;
+
                 break;
             case self::LOGISTICS_STATUS_REJECTED:
                 $hasProgresses = true;
                 $progressCutoff = true;
+
                 break;
             case self::LOGISTICS_STATUS_SEND_BACK:
                 $hasProgresses = true;
                 $progressCutoff = true;
                 $isReturn = true;
+
                 break;
             case self::LOGISTICS_STATUS_TIMEOUT:
                 $hasProgresses = true;
                 $progressCutoff = true;
+
                 break;
             case self::LOGISTICS_STATUS_TO_BE_CLEARED:
                 $hasProgresses = true;
+
                 break;
             case self::LOGISTICS_STATUS_CLEARANCE:
                 $hasProgresses = true;
+
                 break;
             case self::LOGISTICS_STATUS_CLEARED:
                 $hasProgresses = true;
+
                 break;
             case self::LOGISTICS_STATUS_CUSTOMS_CLEARANCE_ABNORMALITY:
                 $hasProgresses = true;
                 $isTroublesome = true;
+
                 break;
             case self::LOGISTICS_STATUS_AWAIT_SIGN:
                 $hasProgresses = true;
+
                 break;
         }
 

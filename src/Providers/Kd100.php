@@ -197,39 +197,51 @@ class Kd100 extends AbstractProvider implements Kd100ConfigurationConstant
         switch ($status) {
             case self::STATUS_PACKAGE:
                 $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+
                 break;
             case self::STATUS_DIFFICULT:
                 $status = self::LOGISTICS_STATUS_TROUBLESOME;
+
                 break;
             case self::STATUS_SIGNING:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_REFUND:
                 $status = self::LOGISTICS_STATUS_RETURN_RECEIPT;
+
                 break;
             case self::STATUS_PIECE:
                 $status = self::LOGISTICS_STATUS_DELIVERING;
+
                 break;
             case self::STATUS_RETURN:
                 $status = self::LOGISTICS_STATUS_SEND_BACK;
+
                 break;
             case self::RETURN_TO_BE_CLEARED:
                 $status = self::LOGISTICS_STATUS_TO_BE_CLEARED;
+
                 break;
             case self::STATUS_CLEARANCE:
                 $status = self::LOGISTICS_STATUS_CLEARANCE;
+
                 break;
             case self::STATUS_CLEARED:
                 $status = self::LOGISTICS_STATUS_CLEARED;
+
                 break;
             case self::STATUS_CUSTOMS_CLEARANCE_ABNORMALITY:
                 $status = self::LOGISTICS_STATUS_CUSTOMS_CLEARANCE_ABNORMALITY;
+
                 break;
             case self::STATUS_RECIPIENT_REFUSAL:
                 $status = self::LOGISTICS_STATUS_REJECTED;
+
                 break;
             default:
                 $status = self::LOGISTICS_STATUS_ERROR;
+
                 break;
         }
 
