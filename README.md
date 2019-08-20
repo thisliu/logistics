@@ -10,24 +10,24 @@
 [![License](https://poser.pugx.org/finecho/logistics/license)](https://packagist.org/packages/finecho/logistics)
 
 ## ⚠️ 更新提示
- 1. 物流查询方法修改为：$order = $logistics->query('805741929402797742', '圆通');
+ 1. 物流查询方法修改为：`$order = $logistics->query('805741929402797742', '圆通');`
  2. 快递100 类名由 `Kuaidi100` 修改为 `Kd100`
- 3. 返回物流状态已统一,具体请查看：src/Interfaces/LogisticsStatus.php
+ 3. 返回物流状态已统一,具体请查看：`src/Interfaces/LogisticsStatus.php`
  4. 抽象物流状态为五种结果：
-    * has_progresses:是否已经有动态
-    * progress_cutoff:动态是否已经截止
-    * is_signed:是否签收
-    * is_troublesome:是否问题件
-    * is_return:是否退回件
+    * `has_progresses`: 是否已经有动态
+    * `progress_cutoff`: 动态是否已经截止
+    * `is_signed`: 是否签收
+    * `is_troublesome`: 是否问题件
+    * `is_return`: 是否退回件
 
 ## 介绍
  
  目前已支持四家平台
  
- * 阿里云 [Aliyun](https://homenew.console.aliyun.com/)
- * 聚合数据 [Juhe](https://www.juhe.cn/docs/api/id/43)
- * 快递100 [Kd100](https://www.kuaidi100.com/)
- * 快递鸟  [kdniao](https://www.kdniao.com/)
+ * [阿里云](https://homenew.console.aliyun.com/)
+ * [聚合数据](https://www.juhe.cn/docs/api/id/43)
+ * [快递100](https://www.kuaidi100.com/)
+ * [快递鸟](https://www.kdniao.com/)
 
 ## 安装	
 
@@ -164,7 +164,7 @@ $order->getCompany(); // 物流公司简称
 $order->getNo(); // 物流单号
 $order->getStatus(); // 当前物流单状态 
 
-`注：#物流状态可能不是一定准确的#`
+// 注：物流状态可能不一定准确
 
 $order->getDisplayStatus(); // 当前物流单状态展示名
 $order->getAbstractStatus(); // 当前抽象物流单状态
@@ -179,7 +179,6 @@ $order->getOriginal(); // 获取接口原始返回信息
 
 ```	
  string   order(string $no, string $company = null)	
-
 ```
 > - `$no` - 物流单号	
 > - `$company` - 快递公司名（通过 $companies = $logistics->companies(); 获取)
