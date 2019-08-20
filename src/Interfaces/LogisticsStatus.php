@@ -75,7 +75,7 @@ interface LogisticsStatus
     public function claimLogisticsStatus($status);
 
     /**
-     * @param      $status
+     * @param $status
      *
      * @return array
      */

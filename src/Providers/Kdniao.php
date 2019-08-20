@@ -218,66 +218,87 @@ class Kdniao extends AbstractProvider implements KdniaoConfigurationConstant
         switch ($status) {
             case self::STATUS_NO_TRACK:
                 $status = self::LOGISTICS_STATUS_NO_RECORD;
+
                 break;
             case self::STATUS_PACKAGE:
                 $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+
                 break;
             case self::STATUS_ON_THE_WAY:
                 $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+
                 break;
             case self::STATUS_SIGNING:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_QUESTION_PACKAGE:
                 $status = self::LOGISTICS_STATUS_TROUBLESOME;
+
                 break;
             case self::STATUS_IN_THE_CITY:
                 $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+
                 break;
             case self::STATUS_IN_THE_PACKAGE:
                 $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+
                 break;
             case self::STATUS_DIEPOSIT_ARK:
                 $status = self::LOGISTICS_STATUS_AWAIT_SIGN;
+
                 break;
             case self::STATUS_NORMAL_SIGNING:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_ABNORMAL_SIGNING:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_ISSUING_SIGNING:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_ARK_SIGNING:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_NO_DELIVERY_INFO:
                 $status = self::LOGISTICS_STATUS_TROUBLESOME;
+
                 break;
             case self::STATUS_TIMEOUT_NOT_SIGNING:
                 $status = self::LOGISTICS_STATUS_TIMEOUT;
+
                 break;
             case self::STATUS_TIMEOUT_NOT_UPDATE:
                 $status = self::LOGISTICS_STATUS_TIMEOUT;
+
                 break;
             case self::STATUS_RETURN_PACKAGE:
                 $status = self::LOGISTICS_STATUS_REJECTED;
+
                 break;
             case self::STATUS_PACKAGE_ERROR:
                 $status = self::LOGISTICS_STATUS_DELIVERY_FAILED;
+
                 break;
             case self::STATUS_RETURN_SINGNING:
                 $status = self::LOGISTICS_STATUS_RETURN_RECEIPT;
+
                 break;
             case self::STATUS_RETURN_NOT_SINGNING:
                 $status = self::LOGISTICS_STATUS_AWAIT_SIGN;
+
                 break;
             case self::STATUS_ARK_NOT_SINGNING:
                 $status = self::LOGISTICS_STATUS_AWAIT_SIGN;
+
                 break;
             default:
                 $status = self::LOGISTICS_STATUS_ERROR;
+
                 break;
         }
 

@@ -11,7 +11,6 @@
 
 namespace Finecho\Logistics\Providers;
 
-use function Couchbase\defaultDecoder;
 use Finecho\Logistics\Exceptions\HttpException;
 use Finecho\Logistics\Exceptions\InquiryErrorException;
 use Finecho\Logistics\Exceptions\InvalidArgumentException;
@@ -146,42 +145,55 @@ class Juhe extends AbstractProvider implements JuheConfigurationConstant
         switch ($status) {
             case self::STATUS_PENDING:
                 $status = self::LOGISTICS_STATUS_NO_RECORD;
+
                 break;
             case self::STATUS_NO_RECORD:
                 $status = self::LOGISTICS_STATUS_NO_RECORD;
+
                 break;
             case self::STATUS_IN_TRANSIT:
                 $status = self::LOGISTICS_STATUS_IN_TRANSIT;
+
                 break;
             case self::STATUS_DELIVERING:
                 $status = self::LOGISTICS_STATUS_DELIVERING;
+
                 break;
             case self::STATUS_SIGNED:
                 $status = self::LOGISTICS_STATUS_SIGNED;
+
                 break;
             case self::STATUS_REJECTED:
                 $status = self::LOGISTICS_STATUS_REJECTED;
+
                 break;
             case self::STATUS_PROBLEM:
                 $status = self::LOGISTICS_STATUS_TROUBLESOME;
+
                 break;
             case self::STATUS_INVALID:
                 $status = self::LOGISTICS_STATUS_TROUBLESOME;
+
                 break;
             case self::STATUS_TIMEOUT:
                 $status = self::LOGISTICS_STATUS_TIMEOUT;
+
                 break;
             case self::STATUS_FAILED:
                 $status = self::LOGISTICS_STATUS_DELIVERY_FAILED;
+
                 break;
             case self::STATUS_SEND_BACK:
                 $status = self::LOGISTICS_STATUS_SEND_BACK;
+
                 break;
             case self::STATUS_TAKING:
                 $status = self::LOGISTICS_STATUS_COURIER_RECEIPT;
+
                 break;
             default:
                 $status = self::LOGISTICS_STATUS_ERROR;
+
                 break;
         }
 
