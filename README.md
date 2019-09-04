@@ -14,11 +14,11 @@
  2. 快递100 类名由 `Kuaidi100` 修改为 `Kd100`
  3. 返回物流状态已统一,具体请查看：`src/Interfaces/LogisticsStatus.php`
  4. 抽象物流状态为五种结果：
-    * `has_progresses`: 是否已经有动态
-    * `progress_cutoff`: 动态是否已经截止
-    * `is_signed`: 是否签收
-    * `is_troublesome`: 是否问题件
-    * `is_return`: 是否退回件
+    * `has_active`: 是否已经有动态
+    * `has_ended`: 动态是否已经截止
+    * `has_signed`: 是否签收
+    * `has_troubled`: 是否问题件
+    * `has_returned`: 是否退回件
 
 ## 介绍
  
@@ -101,11 +101,11 @@ $order = $logistics->query('805741929402797742', '圆通');
     "status": 4,
     "display_status": "已签收",
     "abstract_status": {
-        "has_progresses" : true,
-        "progress_cutoff" : true,
-        "is_signed" : true,
-        "is_troublesome" : false,
-        "is_return" : false
+        "has_active" : true,
+        "has_ended" : true,
+        "has_signed" : true,
+        "has_troubled" : false,
+        "has_returned" : false
     },
     "list": [
         {

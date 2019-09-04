@@ -110,85 +110,85 @@ abstract class AbstractProvider implements ProviderInterface, LogisticsStatus
             case self::LOGISTICS_STATUS_ERROR:
                 break;
             case self::LOGISTICS_STATUS_COURIER_RECEIPT:
-                $hasProgresses = true;
+                $hasActive = true;
 
                 break;
             case self::LOGISTICS_STATUS_IN_TRANSIT:
-                $hasProgresses = true;
+                $hasActive = true;
 
                 break;
             case self::LOGISTICS_STATUS_DELIVERING:
-                $hasProgresses = true;
+                $hasActive = true;
 
                 break;
             case self::LOGISTICS_STATUS_SIGNED:
-                $hasProgresses = true;
-                $progressCutoff = true;
-                $isSigned = true;
+                $hasActive = true;
+                $hasEnded = true;
+                $hasSigned = true;
 
                 break;
             case self::LOGISTICS_STATUS_DELIVERY_FAILED:
-                $hasProgresses = true;
-                $progressCutoff = true;
-                $isTroublesome = false;
+                $hasActive = true;
+                $hasEnded = true;
+                $hasTroubled = false;
 
                 break;
             case self::LOGISTICS_STATUS_TROUBLESOME:
-                $isTroublesome = false;
+                $hasTroubled = false;
 
                 break;
             case self::LOGISTICS_STATUS_RETURN_RECEIPT:
-                $hasProgresses = true;
-                $progressCutoff = true;
-                $isTroublesome = true;
-                $isReturn = true;
+                $hasActive = true;
+                $hasEnded = true;
+                $hasTroubled = true;
+                $hasReturned = true;
 
                 break;
             case self::LOGISTICS_STATUS_REJECTED:
-                $hasProgresses = true;
-                $progressCutoff = true;
+                $hasActive = true;
+                $hasEnded = true;
 
                 break;
             case self::LOGISTICS_STATUS_SEND_BACK:
-                $hasProgresses = true;
-                $progressCutoff = true;
-                $isReturn = true;
+                $hasActive = true;
+                $hasEnded = true;
+                $hasReturned = true;
 
                 break;
             case self::LOGISTICS_STATUS_TIMEOUT:
-                $hasProgresses = true;
-                $progressCutoff = true;
+                $hasActive = true;
+                $hasEnded = true;
 
                 break;
             case self::LOGISTICS_STATUS_TO_BE_CLEARED:
-                $hasProgresses = true;
+                $hasActive = true;
 
                 break;
             case self::LOGISTICS_STATUS_CLEARANCE:
-                $hasProgresses = true;
+                $hasActive = true;
 
                 break;
             case self::LOGISTICS_STATUS_CLEARED:
-                $hasProgresses = true;
+                $hasActive = true;
 
                 break;
             case self::LOGISTICS_STATUS_CUSTOMS_CLEARANCE_ABNORMALITY:
-                $hasProgresses = true;
-                $isTroublesome = true;
+                $hasActive = true;
+                $hasTroubled = true;
 
                 break;
             case self::LOGISTICS_STATUS_AWAIT_SIGN:
-                $hasProgresses = true;
+                $hasActive = true;
 
                 break;
         }
 
         return [
-            'has_progresses' => isset($hasProgresses) ? $hasProgresses : false,
-            'progress_cutoff' => isset($progressCutoff) ? $progressCutoff : false,
-            'is_signed' => isset($isSigned) ? $isSigned : false,
-            'is_troublesome' => isset($isTroublesome) ? $isTroublesome : false,
-            'is_return' => isset($isReturn) ? $isReturn : false,
+            'has_active' => isset($hasActive) ? $hasActive : false,
+            'has_ended' => isset($hasEnded) ? $hasEnded : false,
+            'has_signed' => isset($hasSigned) ? $hasSigned : false,
+            'has_troubled' => isset($hasTroubled) ? $hasTroubled : false,
+            'has_returned' => isset($hasReturned) ? $hasReturned : false,
         ];
     }
 }
