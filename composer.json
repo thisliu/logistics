@@ -1,5 +1,5 @@
 {
-    "name": "finecho\/logistics",
+    "name": "finecho/logistics",
     "description": "A logistics SDK.",
     "license": "MIT",
     "authors": [
@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3|^7.2"
     },
     "autoload": {
         "psr-4": {
