@@ -15,9 +15,9 @@ interface AliyunConfigurationConstant
 {
     const PROVIDER_NAME = 'Aliyun';
 
-    const LOGISTICS_INFO_URL = 'http://wuliu.market.alicloudapi.com/kdi';
+    const LOGISTICS_INFO_URL = 'https://jisukdcx.market.alicloudapi.com/express/query';
 
-    const LOGISTICS_COMPANY_URL = 'http://wuliu.market.alicloudapi.com/getExpressList';
+    const LOGISTICS_COMPANY_URL = 'https://jisukdcx.market.alicloudapi.com/express/type';
 
     const SUCCESS_STATUS = 0;
 
