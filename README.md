@@ -2,23 +2,11 @@
 
 <p>快递物流查询-快递查询接口组件。</p>
 	
- [![Build Status](https://travis-ci.org/finecho/logistics.svg?branch=master)](https://travis-ci.org/finecho/logistics)	
-![StyleCI build status](https://github.styleci.io/repos/185047335/shield)
+[![Build Status](https://travis-ci.org/finecho/logistics.svg?branch=master)](https://travis-ci.org/finecho/logistics)	
 [![Latest Stable Version](https://poser.pugx.org/finecho/logistics/v/stable)](https://packagist.org/packages/finecho/logistics)
 [![Total Downloads](https://poser.pugx.org/finecho/logistics/downloads)](https://packagist.org/packages/finecho/logistics)
 [![Latest Unstable Version](https://poser.pugx.org/finecho/logistics/v/unstable)](https://packagist.org/packages/finecho/logistics)
 [![License](https://poser.pugx.org/finecho/logistics/license)](https://packagist.org/packages/finecho/logistics)
-
-## ⚠️ 更新提示
- 1. 物流查询方法修改为：`$order = $logistics->query('805741929402797742', '圆通');`
- 2. 快递100 类名由 `Kuaidi100` 修改为 `Kd100`
- 3. 返回物流状态已统一,具体请查看：`src/Interfaces/LogisticsStatus.php`
- 4. 抽象物流状态为五种结果：
-    * `has_active`: 是否已经有动态
-    * `has_ended`: 动态是否已经截止
-    * `has_signed`: 是否签收
-    * `has_troubled`: 是否问题件
-    * `has_returned`: 是否退回件
 
 ## 介绍
  
