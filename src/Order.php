@@ -125,6 +125,7 @@ class Order implements \ArrayAccess, OrderInterface, \JsonSerializable, \Seriali
     /**
      * {@inheritdoc}
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->attributes;
